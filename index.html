@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВКЛЮЧИ ИИ — Экосистема искусственного интеллекта</title>
+    <meta name="description" content="Помогаем людям и бизнесу внедрять искусственный интеллект. Обучение, автоматизация, чат-боты, контент-заводы.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS VARIABLES (Avtograf Style) ===== */
+        :root {
+            /* Backgrounds */
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+
+            /* Text */
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.4);
+
+            /* Accents */
+            --accent-blue: #69ace4;
+            --accent-blue-light: #8ec5f0;
+            --accent-cream: #f4dcc0;
+            --accent-green: #4ade80;
+
+            /* Gradients */
+            --gradient-blue: linear-gradient(135deg, #69ace4, #4a90c9);
+            --gradient-overlay: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(105,172,228,0.1));
+            --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+
+            /* Blur decorations */
+            --blur-blue: rgba(105, 172, 228, 0.4);
+            --blur-cream: rgba(244, 220, 192, 0.3);
+
+            /* Typography */
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Timing */
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.4s ease;
+            --transition-slow: 0.6s ease;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        /* ===== BLUR DECORATIONS ===== */
+        .blur-decoration {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blur-blue {
+            background: var(--blur-blue);
+        }
+
+        .blur-cream {
+            background: var(--blur-cream);
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: clamp(36px, 5vw, 64px);
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: clamp(20px, 2.5vw, 28px);
+            margin-bottom: 16px;
+        }
+
+        .text-gradient {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-accent {
+            color: var(--accent-blue);
+        }
+
+        .text-cream {
+            color: var(--accent-cream);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-blue);
+            margin-bottom: 24px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent-blue);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 35px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform var(--transition-fast);
+        }
+
+        .btn:hover .btn-icon {
+            transform: translateX(4px);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 0;
+            transition: var(--transition-medium);
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 16px 0;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            background: var(--text-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 400;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-blue);
+            transition: var(--transition-fast);
+        }
+
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-cta {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 1px;
+            background: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 160px 0 120px;
+        }
+
+        .hero-blur-1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -200px;
+            opacity: 0.5;
+        }
+
+        .hero-blur-2 {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: -100px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            max-width: 700px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: rgba(105, 172, 228, 0.1);
+            border: 1px solid rgba(105, 172, 228, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            margin-bottom: 32px;
+        }
+
+        .hero-eyebrow-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .hero h1 {
+            font-weight: 700;
+        }
+
+        .hero h1 .line {
+            display: block;
+        }
+
+        .hero h1 .line-thin {
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 56px;
+        }
+
+        .hero-stat {
+            position: relative;
+        }
+
+        .hero-stat::after {
+            content: '';
+            position: absolute;
+            right: -28px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-stat:last-child::after {
+            display: none;
+        }
+
+        .hero-stat-value {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .hero-stat-value .accent {
+            color: var(--accent-blue);
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-visual-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-visual-container:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-visual-container:hover .hero-orb {
+            animation-duration: 4s, 10s, 3s;
+        }
+
+        .hero-visual-container:hover .hero-ring {
+            border-color: rgba(105, 172, 228, 0.4);
+        }
+
+        .hero-orb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(105, 172, 228, 0.8),
+                rgba(105, 172, 228, 0.4) 40%,
+                rgba(105, 172, 228, 0.1) 60%,
+                transparent 70%);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 8s ease-in-out infinite, orb-rotate 20s linear infinite, orb-scale 6s ease-in-out infinite;
+        }
+
+        .hero-orb::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                transparent 30%,
+                rgba(244, 220, 192, 0.1) 50%,
+                transparent 70%);
+            animation: pulse-glow 3s ease-in-out infinite alternate, rotate-reverse 15s linear infinite;
+        }
+
+        .hero-orb::after {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 60% 60%,
+                rgba(255, 255, 255, 0.3),
+                transparent 50%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        .hero-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-ring-1 {
+            width: 350px;
+            height: 350px;
+            animation: rotate-slow 30s linear infinite;
+        }
+
+        .hero-ring-2 {
+            width: 420px;
+            height: 420px;
+            animation: rotate-slow 40s linear infinite reverse;
+        }
+
+        .hero-ring-3 {
+            width: 480px;
+            height: 480px;
+            border-style: dashed;
+            border-color: rgba(105, 172, 228, 0.2);
+            animation: rotate-slow 50s linear infinite;
+        }
+
+        .hero-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-blue);
+        }
+
+        .hero-dot-1 {
+            top: 15%;
+            left: 20%;
+            animation: orbit-1 8s linear infinite, pulse 2s ease-in-out infinite;
+        }
+
+        .hero-dot-2 {
+            top: 70%;
+            right: 15%;
+            animation: orbit-2 12s linear infinite reverse, pulse 3s ease-in-out infinite;
+        }
+
+        .hero-dot-3 {
+            bottom: 20%;
+            left: 30%;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-cream);
+            box-shadow: 0 0 15px var(--accent-cream);
+            animation: orbit-3 10s linear infinite, pulse 2.5s ease-in-out infinite;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            position: relative;
+            padding: 140px 0;
+        }
+
+        .section-header {
+            max-width: 600px;
+            margin-bottom: 80px;
+        }
+
+        .section-header.center {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* ===== PROBLEMS SECTION ===== */
+        .problems {
+            background: var(--bg-secondary);
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 32px;
+            transition: var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            opacity: 0;
+            transition: var(--transition-medium);
+        }
+
+        .problem-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(105, 172, 228, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .problem-card:hover::before {
+            opacity: 1;
+        }
+
+        .problem-number {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 48px;
+            transition: var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(105, 172, 228, 0.1), transparent 70%);
+            opacity: 0;
+            transition: var(--transition-medium);
+        }
+
+        .service-card:hover {
+            border-color: rgba(105, 172, 228, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 32px;
+            transition: var(--transition-medium);
+        }
+
+        .service-card:hover .service-icon {
+            background: rgba(105, 172, 228, 0.1);
+            border-color: rgba(105, 172, 228, 0.3);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .service-card > p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .service-link:hover {
+            color: var(--accent-blue);
+        }
+
+        .service-link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform var(--transition-fast);
+        }
+
+        .service-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ===== PROCESS SECTION ===== */
+        .process {
+            background: var(--bg-secondary);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            right: 80px;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(105, 172, 228, 0.3) 20%,
+                rgba(105, 172, 228, 0.3) 80%,
+                transparent);
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin: 0 auto 32px;
+            transition: var(--transition-medium);
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-step:hover .process-number {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(105, 172, 228, 0.2);
+        }
+
+        .process-step h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 14px;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        /* ===== CASES SECTION ===== */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .case-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .case-image {
+            height: 220px;
+            background: linear-gradient(135deg, rgba(105, 172, 228, 0.2), rgba(244, 220, 192, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-overlay);
+        }
+
+        .case-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .case-content {
+            padding: 32px;
+        }
+
+        .case-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .case-card > .case-content > p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .case-result {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            background: rgba(74, 222, 128, 0.1);
+            border-radius: 12px;
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* ===== TRAINING SECTION ===== */
+        .training {
+            background: var(--bg-secondary);
+        }
+
+        .training-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .training-visual {
+            position: relative;
+            height: 500px;
+            background: var(--gradient-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .training-visual::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(105, 172, 228, 0.2), transparent 70%);
+        }
+
+        .training-visual-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: 0.5;
+        }
+
+        .training-list {
+            list-style: none;
+            margin: 32px 0 48px;
+        }
+
+        .training-list li {
+            display: flex;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .training-list-number {
+            font-family: var(--font-heading);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            flex-shrink: 0;
+        }
+
+        .training-list-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .training-list-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 40px;
+            transition: var(--transition-medium);
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .testimonial-quote {
+            font-size: 32px;
+            color: var(--accent-blue);
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cream));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--bg-primary);
+        }
+
+        .testimonial-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-info span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq {
+            background: var(--bg-secondary);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .faq-item:hover,
+        .faq-item.active {
+            border-color: rgba(105, 172, 228, 0.2);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px 32px;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            color: var(--accent-blue);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-medium);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 32px 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta {
+            padding: 160px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-blur-1 {
+            width: 500px;
+            height: 500px;
+            top: 50%;
+            left: 20%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+        }
+
+        .cta-blur-2 {
+            width: 300px;
+            height: 300px;
+            top: 30%;
+            right: 15%;
+            opacity: 0.2;
+        }
+
+        .cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            margin-bottom: 24px;
+        }
+
+        .cta-content p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-primary);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 20px 0 32px;
+            max-width: 280px;
+            line-height: 1.7;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            transition: var(--transition-fast);
+        }
+
+        .footer-social a:hover {
+            background: var(--text-primary);
+            border-color: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 16px;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; box-shadow: 0 0 20px currentColor; }
+            50% { opacity: 1; box-shadow: 0 0 40px currentColor; }
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes rotate-slow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes orb-rotate {
+            from { filter: blur(1px) hue-rotate(0deg); }
+            to { filter: blur(1px) hue-rotate(360deg); }
+        }
+
+        @keyframes orb-scale {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.15); }
+        }
+
+        @keyframes rotate-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                transform: translate(-10%, -10%);
+                opacity: 0.2;
+            }
+            50% {
+                transform: translate(10%, 10%);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes orbit-1 {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(40px, -30px); }
+            50% { transform: translate(20px, -60px); }
+            75% { transform: translate(-20px, -40px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes orbit-2 {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-50px, 30px); }
+            50% { transform: translate(-30px, 70px); }
+            75% { transform: translate(30px, 50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes orbit-3 {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, 40px) scale(1.2); }
+            50% { transform: translate(60px, 20px) scale(1); }
+            75% { transform: translate(40px, -20px) scale(0.8); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 32px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-visual-container {
+                width: 400px;
+                height: 400px;
+            }
+
+            .hero-text {
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .hero-description {
+                margin: 0 auto 48px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .problems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .cases-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .training-content {
+                grid-template-columns: 1fr;
+            }
+
+            .training-visual {
+                height: 350px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            section {
+                padding: 100px 0;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                padding: 140px 0 80px;
+            }
+
+            .hero-visual-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-orb {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-ring-1 { width: 250px; height: 250px; }
+            .hero-ring-2 { width: 290px; height: 290px; }
+            .hero-ring-3 { width: 330px; height: 330px; }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .hero-stat::after {
+                display: none;
+            }
+
+            .hero-stat-value {
+                font-size: 36px;
+            }
+
+            .problems-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cases-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card,
+            .testimonial-card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-mark">AI</div>
+                <span>ВКЛЮЧИ ИИ</span>
+            </a>
+
+            <nav class="nav">
+                <a href="#services">Услуги</a>
+                <a href="#cases">Кейсы</a>
+                <a href="#training">Обучение</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+
+            <a href="#cta" class="btn btn-glass header-cta">Консультация</a>
+
+            <button class="mobile-menu-btn" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="blur-decoration blur-blue hero-blur-1"></div>
+        <div class="blur-decoration blur-cream hero-blur-2"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-eyebrow">
+                        <span class="hero-eyebrow-dot"></span>
+                        Экосистема AI-решений
+                    </div>
+
+                    <h1>
+                        <span class="line">Выключи</span>
+                        <span class="line line-thin">рутину</span>
+                        <span class="line text-accent">Включи жизнь</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Помогаю людям и бизнесу внедрять искусственный интеллект —
+                        чтобы освободить время, усилить мышление и зарабатывать больше.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#cta" class="btn btn-primary">
+                            Начать сейчас
+                            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/>
+                            </svg>
+                        </a>
+                        <a href="#services" class="btn btn-outline">Узнать больше</a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">50<span class="accent">+</span></div>
+                            <div class="hero-stat-label">Проектов</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">98<span class="accent">%</span></div>
+                            <div class="hero-stat-label">Довольных клиентов</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">3<span class="accent">x</span></div>
+                            <div class="hero-stat-label">Рост эффективности</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-visual-container">
+                        <div class="hero-ring hero-ring-1"></div>
+                        <div class="hero-ring hero-ring-2"></div>
+                        <div class="hero-ring hero-ring-3"></div>
+                        <div class="hero-orb"></div>
+                        <div class="hero-dot hero-dot-1"></div>
+                        <div class="hero-dot hero-dot-2"></div>
+                        <div class="hero-dot hero-dot-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROBLEMS SECTION ===== -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Проблемы</span>
+                <h2>Знакомо?</h2>
+                <p class="section-description">
+                    Вы тратите часы на задачи, которые ИИ решает за минуты
+                </p>
+            </div>
+
+            <div class="problems-grid">
+                <div class="problem-card reveal reveal-delay-1">
+                    <div class="problem-number">01</div>
+                    <h3>Нехватка времени</h3>
+                    <p>Рутина съедает все ресурсы. На развитие бизнеса не остаётся сил.</p>
+                </div>
+
+                <div class="problem-card reveal reveal-delay-2">
+                    <div class="problem-number">02</div>
+                    <h3>Контент-хаос</h3>
+                    <p>Посты, статьи, рассылки — бесконечный поток, который нужно генерировать.</p>
+                </div>
+
+                <div class="problem-card reveal reveal-delay-3">
+                    <div class="problem-number">03</div>
+                    <h3>Не знаете с чего начать</h3>
+                    <p>ИИ-инструментов сотни, а как применить их в своём бизнесе — неясно.</p>
+                </div>
+
+                <div class="problem-card reveal reveal-delay-4">
+                    <div class="problem-number">04</div>
+                    <h3>Потеря клиентов</h3>
+                    <p>Заявки остаются без ответа. Менеджеры не успевают обрабатывать лиды.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header center reveal">
+                <span class="section-label">Услуги</span>
+                <h2>Что мы делаем</h2>
+                <p class="section-description">
+                    Комплексный подход к внедрению AI в ваш бизнес
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">📱</div>
+                    <h3>Контент-завод</h3>
+                    <p>Автоматизация создания контента для соцсетей, блогов и email-рассылок. Экономьте до 20 часов в неделю.</p>
+                    <ul class="service-features">
+                        <li>Генерация постов и статей на автопилоте</li>
+                        <li>Адаптация контента под разные площадки</li>
+                        <li>Автопостинг и аналитика</li>
+                    </ul>
+                    <a href="#" class="service-link">
+                        Подробнее
+                        <svg viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">💬</div>
+                    <h3>Чат-боты и автоворонки</h3>
+                    <p>Умные боты, которые продают, консультируют и работают 24/7 без выходных и перерывов.</p>
+                    <ul class="service-features">
+                        <li>Квалификация и прогрев лидов</li>
+                        <li>Автоответы в мессенджерах и соцсетях</li>
+                        <li>Интеграция с CRM и платёжными системами</li>
+                    </ul>
+                    <a href="#" class="service-link">
+                        Подробнее
+                        <svg viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Комплексная автоматизация</h3>
+                    <p>Полная AI-трансформация бизнес-процессов. Аудит, внедрение и поддержка под ключ.</p>
+                    <ul class="service-features">
+                        <li>Аудит текущих процессов</li>
+                        <li>Разработка и внедрение AI-систем</li>
+                        <li>Обучение команды работе с инструментами</li>
+                    </ul>
+                    <a href="#" class="service-link">
+                        Подробнее
+                        <svg viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">🎓</div>
+                    <h3>Обучение по AI</h3>
+                    <p>Курсы и тренинги для тех, кто хочет освоить нейросети и применять их в работе уже сегодня.</p>
+                    <ul class="service-features">
+                        <li>Онлайн-курсы с практикой</li>
+                        <li>Персональное менторство</li>
+                        <li>Корпоративные программы обучения</li>
+                    </ul>
+                    <a href="#" class="service-link">
+                        Подробнее
+                        <svg viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS SECTION ===== -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header center reveal">
+                <span class="section-label">Процесс</span>
+                <h2>Как мы работаем</h2>
+                <p class="section-description">
+                    Простой путь от первого звонка до работающей системы
+                </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step reveal reveal-delay-1">
+                    <div class="process-number">01</div>
+                    <h3>Консультация</h3>
+                    <p>Обсуждаем задачи и находим точки роста</p>
+                </div>
+
+                <div class="process-step reveal reveal-delay-2">
+                    <div class="process-number">02</div>
+                    <h3>Аудит</h3>
+                    <p>Анализируем процессы и выбираем решения</p>
+                </div>
+
+                <div class="process-step reveal reveal-delay-3">
+                    <div class="process-number">03</div>
+                    <h3>Внедрение</h3>
+                    <p>Настраиваем и интегрируем AI-инструменты</p>
+                </div>
+
+                <div class="process-step reveal reveal-delay-4">
+                    <div class="process-number">04</div>
+                    <h3>Результат</h3>
+                    <p>Вы экономите время и зарабатываете больше</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CASES SECTION ===== -->
+    <section class="cases" id="cases">
+        <div class="container">
+            <div class="section-header center reveal">
+                <span class="section-label">Кейсы</span>
+                <h2>Результаты клиентов</h2>
+                <p class="section-description">
+                    Реальные цифры и достижения
+                </p>
+            </div>
+
+            <div class="cases-grid">
+                <div class="case-card reveal">
+                    <div class="case-image">
+                        <span class="case-tag">Автоматизация</span>
+                    </div>
+                    <div class="case-content">
+                        <h3>Интернет-магазин одежды</h3>
+                        <p>Внедрили чат-бота для обработки заказов и консультирования клиентов в Telegram и WhatsApp</p>
+                        <div class="case-result">↑ 40% конверсии в заказ</div>
+                    </div>
+                </div>
+
+                <div class="case-card reveal">
+                    <div class="case-image">
+                        <span class="case-tag">Контент</span>
+                    </div>
+                    <div class="case-content">
+                        <h3>Маркетинговое агентство</h3>
+                        <p>Настроили контент-завод для 15 клиентов агентства с автоматической генерацией постов</p>
+                        <div class="case-result">↓ 70% времени на контент</div>
+                    </div>
+                </div>
+
+                <div class="case-card reveal">
+                    <div class="case-image">
+                        <span class="case-tag">Обучение</span>
+                    </div>
+                    <div class="case-content">
+                        <h3>IT-компания</h3>
+                        <p>Обучили команду из 20 человек работе с AI-инструментами для разработки и тестирования</p>
+                        <div class="case-result">↑ 2x продуктивность</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRAINING SECTION ===== -->
+    <section class="training" id="training">
+        <div class="container">
+            <div class="training-content">
+                <div class="training-visual reveal">
+                    <div class="training-visual-icon">🎓</div>
+                </div>
+
+                <div class="training-text">
+                    <span class="section-label reveal">Обучение</span>
+                    <h2 class="reveal">Научись работать с <span class="text-accent">ИИ</span></h2>
+                    <p class="section-description reveal">
+                        Авторские курсы и программы для тех, кто хочет освоить нейросети
+                        и применять их в работе уже сегодня.
+                    </p>
+
+                    <ul class="training-list">
+                        <li class="reveal">
+                            <span class="training-list-number">01</span>
+                            <div class="training-list-content">
+                                <h4>Базовый курс по ChatGPT</h4>
+                                <p>От основ до продвинутых промптов за 2 недели</p>
+                            </div>
+                        </li>
+                        <li class="reveal">
+                            <span class="training-list-number">02</span>
+                            <div class="training-list-content">
+                                <h4>AI для предпринимателей</h4>
+                                <p>Как внедрить ИИ в бизнес-процессы и сэкономить</p>
+                            </div>
+                        </li>
+                        <li class="reveal">
+                            <span class="training-list-number">03</span>
+                            <div class="training-list-content">
+                                <h4>Корпоративное обучение</h4>
+                                <p>Программы для команд от 5 человек под ваши задачи</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary reveal">Выбрать курс</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header center reveal">
+                <span class="section-label">Отзывы</span>
+                <h2>Что говорят клиенты</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        Внедрили чат-бота за 2 недели. Теперь он обрабатывает 80% заявок
+                        без участия менеджеров. Экономия — 3 часа в день!
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">АК</div>
+                        <div class="testimonial-info">
+                            <h4>Алексей К.</h4>
+                            <span>Владелец интернет-магазина</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        После курса по ChatGPT я стала делать за 2 часа то, на что раньше
+                        уходил весь день. Контент-план на месяц готовится за вечер.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">МС</div>
+                        <div class="testimonial-info">
+                            <h4>Мария С.</h4>
+                            <span>Маркетолог</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        Павел помог автоматизировать рутину в агентстве. Теперь команда
+                        занимается творческими задачами, а не копипастом.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">ДЛ</div>
+                        <div class="testimonial-info">
+                            <h4>Дмитрий Л.</h4>
+                            <span>CEO digital-агентства</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-grid">
+                <div class="section-header reveal">
+                    <span class="section-label">FAQ</span>
+                    <h2>Частые вопросы</h2>
+                    <p class="section-description">
+                        Ответы на популярные вопросы о работе с AI
+                    </p>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item reveal">
+                        <button class="faq-question">
+                            <span>Нужны ли технические знания?</span>
+                            <div class="faq-icon">+</div>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Нет, наши решения разрабатываются для людей без технического образования.
+                                Мы обучаем команду и обеспечиваем поддержку на всех этапах.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <button class="faq-question">
+                            <span>Сколько времени занимает внедрение?</span>
+                            <div class="faq-icon">+</div>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Базовые решения внедряются за 1-2 недели.
+                                Комплексные проекты — от 1 до 3 месяцев в зависимости от масштаба.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <button class="faq-question">
+                            <span>Можно ли попробовать перед покупкой?</span>
+                            <div class="faq-icon">+</div>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Да, мы проводим бесплатную консультацию и показываем демо-версии решений.
+                                Вы увидите результат до оплаты.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <button class="faq-question">
+                            <span>Что если ИИ ошибётся?</span>
+                            <div class="faq-icon">+</div>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Все системы настраиваются с проверками и ограничениями.
+                                Важные действия проходят модерацию. Мы обучаем минимизировать риски.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta" id="cta">
+        <div class="blur-decoration blur-blue cta-blur-1"></div>
+        <div class="blur-decoration blur-cream cta-blur-2"></div>
+
+        <div class="container">
+            <div class="cta-content reveal">
+                <span class="section-label">Начните сейчас</span>
+                <h2>Готовы <span class="text-accent">включить ИИ</span>?</h2>
+                <p>
+                    Запишитесь на бесплатную консультацию и узнайте,
+                    как AI может трансформировать ваш бизнес.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        Получить консультацию
+                        <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/switchonai" class="btn btn-outline">Написать в Telegram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <div class="logo-mark">AI</div>
+                        <span>ВКЛЮЧИ ИИ</span>
+                    </a>
+                    <p>
+                        Экосистема AI-решений для людей и бизнеса.
+                        Помогаем освобождать время и усиливать мышление.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Telegram">TG</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                        <a href="#" aria-label="VK">VK</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li><a href="#">Контент-завод</a></li>
+                        <li><a href="#">Чат-боты</a></li>
+                        <li><a href="#">Автоматизация</a></li>
+                        <li><a href="#">Обучение</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Компания</h4>
+                    <ul>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Кейсы</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><a href="mailto:hello@switchonai.ru">hello@switchonai.ru</a></li>
+                        <li><a href="tel:+79001234567">+7 (900) 123-45-67</a></li>
+                        <li><a href="#">@switchonai</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 ВКЛЮЧИ ИИ. Все права защищены.</p>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 80) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for blur decorations
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+
+            document.querySelectorAll('.blur-decoration').forEach(el => {
+                el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
