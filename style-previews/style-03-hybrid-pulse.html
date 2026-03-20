@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 3 — Hybrid Pulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark: #0f1a2e;
+      --dark-2: #152545;
+      --light: #f7f8fc;
+      --text: #1a263c;
+      --muted: #586582;
+      --accent: #f5a524;
+      --accent-2: #1b85ff;
+      --line: #d6deed;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      color: var(--text);
+      background: var(--light);
+    }
+
+    .hero {
+      color: #eef3ff;
+      background:
+        radial-gradient(circle at 88% 16%, rgba(245, 165, 36, 0.22), transparent 24%),
+        radial-gradient(circle at 14% 0%, rgba(27, 133, 255, 0.25), transparent 28%),
+        linear-gradient(150deg, var(--dark), var(--dark-2));
+      padding: 24px 16px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -120px;
+      right: -120px;
+      bottom: -90px;
+      height: 180px;
+      background: var(--light);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: .02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ring {
+      width: 24px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      position: relative;
+    }
+
+    .ring::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 8px;
+      background: var(--accent);
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .top a {
+      text-decoration: none;
+      color: #f4f8ff;
+      border: 1px solid rgba(233, 241, 255, 0.35);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    .hero-grid {
+      margin-top: 24px;
+      display: grid;
+      gap: 22px;
+      grid-template-columns: 1fr 0.9fr;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5.8vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      max-width: 680px;
+    }
+
+    .hl {
+      color: var(--accent);
+    }
+
+    .lead {
+      margin: 14px 0 0;
+      color: #afc0de;
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    .row {
+      margin-top: 22px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .btn.main {
+      color: #1e1d14;
+      background: linear-gradient(90deg, #f5a524, #ffd773);
+      box-shadow: 0 12px 28px rgba(245, 165, 36, 0.35);
+    }
+
+    .btn.alt {
+      color: #eef3ff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(225, 236, 255, 0.22);
+    }
+
+    .signal {
+      background: rgba(14, 26, 50, 0.68);
+      border: 1px solid rgba(180, 206, 244, 0.24);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .signal h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #f3f7ff;
+    }
+
+    .signal ul {
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .signal li {
+      background: rgba(13, 21, 39, 0.75);
+      border: 1px solid rgba(178, 199, 233, 0.22);
+      border-radius: 12px;
+      padding: 9px 11px;
+      color: #c6d4ec;
+      font-size: 14px;
+    }
+
+    .content {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 4px 16px 48px;
+    }
+
+    .cards {
+      margin-top: 4px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 12px 24px rgba(19, 34, 66, 0.06);
+    }
+
+    .label {
+      color: var(--accent-2);
+      margin: 0 0 6px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      line-height: 1.42;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .final-cta {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .final-cta strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .final-cta span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .final-cta a {
+      text-decoration: none;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: var(--accent-2);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .back {
+      margin-top: 20px;
+      display: inline-flex;
+      text-decoration: none;
+      color: #4f607e;
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="inner">
+      <div class="top">
+        <div class="logo"><span class="ring"></span>ВКЛЮЧИ ИИ</div>
+        <a href="#">Экскурсия по системе</a>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1>Сайт, который сразу показывает: у вас <span class="hl">не шум, а система</span></h1>
+          <p class="lead">Гибридный стиль: эмоциональный тёмный вход + светлая, читаемая деловая часть ниже. Обычно хорошо работает для конверсии на первом экране.</p>
+          <div class="row">
+            <a class="btn main" href="#">Написать «РАЗБОР»</a>
+            <a class="btn alt" href="#">Как это работает</a>
+          </div>
+        </div>
+
+        <aside class="signal">
+          <h2>Что человек видит за 5 секунд</h2>
+          <ul>
+            <li>Есть понятная методика, а не обещания</li>
+            <li>Вы эксперт-практик, не инфо-обещания</li>
+            <li>Чёткий следующий шаг: «РАЗБОР»</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="cards">
+      <article class="card">
+        <p class="label">Смыслы</p>
+        <p>Сначала позиционирование и контент-угол, только потом автоматизация.</p>
+      </article>
+      <article class="card">
+        <p class="label">Система</p>
+        <p>Публикация на 10+ площадок с управлением через единый хаб.</p>
+      </article>
+      <article class="card">
+        <p class="label">Прозрачность</p>
+        <p>Клиент понимает контур и может работать без “чёрного ящика”.</p>
+      </article>
+      <article class="card">
+        <p class="label">Конверсия</p>
+        <p>Единый путь: соцсети → Telegram → видеоурок → экскурсия/клуб.</p>
+      </article>
+    </section>
+
+    <section class="final-cta">
+      <div>
+        <strong>Включить ИИ в бизнес без хаоса</strong>
+        <span>Короткий аудит и разбор вашей текущей системы.</span>
+      </div>
+      <a href="#">Получить разбор</a>
+    </section>
+
+    <a class="back" href="./index.html">← Назад к выбору вариантов</a>
+  </main>
+</body>
+</html>
+

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 2 — Light Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --paper: #ffffff;
+      --text: #152238;
+      --muted: #4f607a;
+      --line: #d8e2f2;
+      --accent: #0f5fdb;
+      --accent-soft: #e6efff;
+      --ok: #1f9f76;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 92% -10%, #e5f0ff 0%, transparent 34%),
+        radial-gradient(circle at -8% 12%, #eaf8f2 0%, transparent 35%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 24px 16px 52px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      backdrop-filter: blur(4px);
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: .03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0f5fdb, #1f9f76);
+      box-shadow: 0 0 0 4px #dceafd;
+    }
+
+    .small-btn {
+      text-decoration: none;
+      color: #174b95;
+      border: 1px solid #bed0ed;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #f2f7ff;
+    }
+
+    .hero {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--paper);
+      padding: clamp(18px, 5vw, 38px);
+      box-shadow: 0 14px 34px rgba(20, 39, 73, 0.08);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 800px;
+      font-size: clamp(30px, 5vw, 62px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .lead {
+      margin-top: 14px;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.53;
+    }
+
+    .cta-row {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn.main {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(15, 95, 219, 0.26);
+    }
+
+    .btn.alt {
+      background: var(--accent-soft);
+      color: #134896;
+      border: 1px solid #c7d8f6;
+    }
+
+    .stats {
+      margin-top: 24px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fcfdff;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #0e3f8e;
+    }
+
+    .stat span {
+      margin-top: 4px;
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .check {
+      color: var(--ok);
+      font-weight: 800;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: 14px;
+    }
+
+    .back {
+      margin-top: 24px;
+      display: inline-flex;
+      text-decoration: none;
+      color: #49628e;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="logo"><span class="dot"></span>ВКЛЮЧИ ИИ</div>
+      <a class="small-btn" href="#">Запросить разбор</a>
+    </header>
+
+    <section class="hero">
+      <h1>Система контент-маркетинга, где <span class="accent">всё понятно клиенту</span> и работает в его голосе</h1>
+      <p class="lead">Светлый вариант: больше доверия, чистоты и “деловой” экспертизы. Удобен, если хотим меньше футуризма и больше ощущения надёжного партнёра.</p>
+
+      <div class="cta-row">
+        <a class="btn main" href="#">Написать «РАЗБОР»</a>
+        <a class="btn alt" href="#">Посмотреть этапы запуска</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>1 месяц</strong>
+          <span>средний срок запуска системы</span>
+        </div>
+        <div class="stat">
+          <strong>10+ площадок</strong>
+          <span>автопубликация в одном контуре</span>
+        </div>
+        <div class="stat">
+          <strong>Прозрачно</strong>
+          <span>клиент понимает каждый шаг</span>
+        </div>
+      </div>
+
+      <div class="list">
+        <article class="item"><span class="check">✓</span><p>Начинаем со смыслов и стратегии, не с генерации “мусора”.</p></article>
+        <article class="item"><span class="check">✓</span><p>Строим актив в собственности клиента, без зависимости от подрядчика.</p></article>
+        <article class="item"><span class="check">✓</span><p>Фокус на видимости и прогреве, без обещаний “мгновенных продаж”.</p></article>
+      </div>
+    </section>
+
+    <a class="back" href="./index.html">← Назад к выбору вариантов</a>
+  </main>
+</body>
+</html>
+

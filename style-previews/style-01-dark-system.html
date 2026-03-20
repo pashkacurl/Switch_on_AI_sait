@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 1 — Dark System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080d19;
+      --bg-soft: #0f172a;
+      --card: rgba(20, 33, 58, 0.76);
+      --text: #eaf2ff;
+      --muted: #9fb0ce;
+      --line: rgba(122, 174, 255, 0.22);
+      --accent: #36b2ff;
+      --accent-2: #2ee58f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(54, 178, 255, 0.28), transparent 32%),
+        radial-gradient(circle at 85% 18%, rgba(46, 229, 143, 0.22), transparent 25%),
+        linear-gradient(145deg, #070c18, #0f1a33 42%, #0a1225);
+      min-height: 100vh;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.3;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+
+    .wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .power {
+      width: 26px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid var(--accent-2);
+      box-shadow: 0 0 14px rgba(46, 229, 143, 0.5);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+
+    .ghost-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      padding: 10px 14px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hero {
+      margin-top: 32px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 6.2vw, 66px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      max-width: 700px;
+    }
+
+    .grad {
+      background: linear-gradient(90deg, #81c7ff, #74ffc4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 16px 0 0;
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn.main {
+      color: #021829;
+      background: linear-gradient(90deg, #36b2ff, #2ee58f);
+      box-shadow: 0 12px 28px rgba(54, 178, 255, 0.3);
+    }
+
+    .btn.alt {
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(17, 28, 50, 0.65);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      padding: 18px;
+      box-shadow: inset 0 1px 0 rgba(205, 228, 255, 0.09), 0 20px 42px rgba(4, 11, 25, 0.45);
+    }
+
+    .panel h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .mini-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-row {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(12, 20, 39, 0.7);
+      color: #c5d5ef;
+      font-size: 14px;
+    }
+
+    .cards {
+      margin-top: 32px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(15, 24, 44, 0.75);
+      padding: 14px;
+    }
+
+    .kicker {
+      color: #84deff;
+      margin: 0 0 6px;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: 14px;
+    }
+
+    .back {
+      margin-top: 24px;
+      display: inline-flex;
+      color: #93a8ca;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+  <main class="wrap">
+    <header class="top">
+      <div class="logo"><span class="power">⏻</span>ВКЛЮЧИ ИИ</div>
+      <a class="ghost-btn" href="#">Запросить разбор</a>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>AI-контент-система, которая превращает <span class="grad">хаос в управляемый поток</span></h1>
+        <p class="lead">Тёмный вариант с ощущением технологичной инфраструктуры. Хорошо подходит, если хотим подчеркнуть экспертность, контроль и глубину.</p>
+        <div class="hero-actions">
+          <a class="btn main" href="#">Написать «РАЗБОР»</a>
+          <a class="btn alt" href="#">Смотреть структуру</a>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <h2>Контур системы</h2>
+        <div class="mini-grid">
+          <div class="mini-row">1. Распаковка смыслов</div>
+          <div class="mini-row">2. Контент-стратегия</div>
+          <div class="mini-row">3. Автопубликация 10+ площадок</div>
+          <div class="mini-row">4. Контроль через хаб</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="cards">
+      <article class="card">
+        <p class="kicker">Позиционирование</p>
+        <p>Не “автопостинг ради охватов”, а система, которая сохраняет голос эксперта.</p>
+      </article>
+      <article class="card">
+        <p class="kicker">Прозрачность</p>
+        <p>Клиент понимает, как всё работает, и не зависит от одного подрядчика.</p>
+      </article>
+      <article class="card">
+        <p class="kicker">Результат</p>
+        <p>Регулярная видимость и прогретые обращения вместо контент-хаоса.</p>
+      </article>
+    </section>
+
+    <a class="back" href="./index.html">← Назад к выбору вариантов</a>
+  </main>
+</body>
+</html>
+

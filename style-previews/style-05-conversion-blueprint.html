@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 5 — Dark Conversion Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-0: #070d1a;
+      --bg-1: #0c1530;
+      --bg-2: #111d3e;
+      --card: #101c38;
+      --card-soft: #132346;
+      --line: #22345e;
+      --ink: #ebf2ff;
+      --muted: #9db0d6;
+      --blue: #4f8fff;
+      --blue-2: #6ca5ff;
+      --mint: #2fd39f;
+      --amber: #ffc86b;
+      --shadow-lg: 0 24px 54px rgba(3, 8, 20, 0.55);
+      --shadow-md: 0 12px 34px rgba(3, 8, 20, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at 88% 3%, rgba(80, 140, 255, 0.20) 0%, transparent 34%),
+        radial-gradient(circle at 8% 16%, rgba(47, 211, 159, 0.14) 0%, transparent 26%),
+        linear-gradient(140deg, var(--bg-0), var(--bg-1) 54%, var(--bg-2));
+      min-height: 100vh;
+    }
+
+    .site {
+      width: min(1160px, 100%);
+      margin: 0 auto;
+      padding: 16px 16px 54px;
+    }
+
+    .topbar {
+      border: 1px solid rgba(128, 160, 225, 0.26);
+      border-radius: 14px;
+      background: rgba(12, 22, 47, 0.72);
+      backdrop-filter: blur(8px);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: reveal .55s ease both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Sora", sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .power {
+      width: 23px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      position: relative;
+      box-shadow: 0 0 18px rgba(79, 143, 255, 0.45);
+    }
+
+    .power::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 9px;
+      background: var(--blue);
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .chip {
+      border: 1px solid rgba(124, 161, 228, 0.34);
+      border-radius: 999px;
+      background: rgba(20, 34, 70, 0.84);
+      color: #bed2f4;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 12px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      margin-top: 14px;
+      border: 1px solid rgba(125, 158, 220, 0.28);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background:
+        radial-gradient(circle at 80% 20%, rgba(95, 162, 255, 0.15) 0%, transparent 34%),
+        linear-gradient(145deg, #0b1430 0%, #101f44 62%, #12224b 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      padding: clamp(18px, 5vw, 36px);
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(31px, 5.8vw, 62px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      max-width: 770px;
+      animation: reveal .65s ease both;
+    }
+
+    .hl {
+      color: #8fc1ff;
+    }
+
+    .lead {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.42;
+      max-width: 630px;
+      animation: reveal .75s ease both;
+    }
+
+    .tags {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      animation: reveal .85s ease both;
+    }
+
+    .tag {
+      border: 1px solid rgba(136, 168, 226, 0.30);
+      border-radius: 999px;
+      background: rgba(18, 35, 72, 0.86);
+      color: #bbcff1;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+    }
+
+    .cta-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      animation: reveal .95s ease both;
+    }
+
+    .btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: "Sora", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-main {
+      color: #06112c;
+      background: linear-gradient(100deg, var(--amber), #ffd98c);
+      box-shadow: 0 14px 28px rgba(255, 200, 107, 0.28);
+    }
+
+    .btn-alt {
+      color: #d6e6ff;
+      border: 1px solid rgba(123, 159, 220, 0.45);
+      background: rgba(20, 34, 68, 0.90);
+    }
+
+    .btn-alt:hover {
+      border-color: rgba(161, 190, 243, 0.76);
+      box-shadow: 0 12px 28px rgba(10, 25, 54, 0.52);
+    }
+
+    .route {
+      border: 1px solid rgba(123, 157, 218, 0.30);
+      border-radius: 18px;
+      background: rgba(13, 24, 51, 0.80);
+      box-shadow: var(--shadow-md);
+      padding: 14px;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      animation: reveal 1.05s ease both;
+    }
+
+    .route::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -52px;
+      top: -70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109, 165, 255, 0.25), transparent 70%);
+      animation: glow 4s ease-in-out infinite;
+    }
+
+    .route h2 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 18px;
+      line-height: 1.24;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow li {
+      border: 1px solid rgba(125, 158, 219, 0.30);
+      border-radius: 11px;
+      background: rgba(15, 28, 58, 0.88);
+      color: #bbcff0;
+      font-size: 14px;
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .idx {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(130deg, #24447f, #1d6fb7);
+      color: #d9e8ff;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .core {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .core-card {
+      border: 1px solid rgba(126, 158, 218, 0.26);
+      border-radius: 16px;
+      background: linear-gradient(165deg, rgba(17, 30, 62, 0.95), rgba(15, 26, 53, 0.95));
+      box-shadow: var(--shadow-md);
+      padding: 14px;
+      transition: transform .2s ease, border-color .2s ease;
+      animation: reveal 0.6s ease both;
+    }
+
+    .core-card:nth-child(2) { animation-delay: .05s; }
+    .core-card:nth-child(3) { animation-delay: .1s; }
+    .core-card:nth-child(4) { animation-delay: .15s; }
+
+    .core-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(161, 188, 236, 0.56);
+    }
+
+    .pill {
+      display: inline-flex;
+      border-radius: 999px;
+      font-family: "Sora", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 5px 9px;
+      border: 1px solid;
+    }
+
+    .pill.pain {
+      color: #fbb0c4;
+      background: rgba(83, 31, 49, 0.46);
+      border-color: rgba(242, 141, 170, 0.38);
+    }
+
+    .pill.method {
+      color: #b6d1ff;
+      background: rgba(32, 57, 108, 0.44);
+      border-color: rgba(133, 166, 224, 0.38);
+    }
+
+    .pill.proof {
+      color: #9de8cf;
+      background: rgba(23, 72, 58, 0.50);
+      border-color: rgba(92, 201, 168, 0.38);
+    }
+
+    .pill.cta {
+      color: #ffe2aa;
+      background: rgba(85, 61, 24, 0.54);
+      border-color: rgba(255, 210, 130, 0.44);
+    }
+
+    .core-card h3 {
+      margin: 10px 0 0;
+      font-family: "Sora", sans-serif;
+      font-size: 20px;
+      line-height: 1.22;
+      color: #f2f6ff;
+    }
+
+    .core-card p {
+      margin: 8px 0 0;
+      color: #a7badf;
+      font-size: 16px;
+      line-height: 1.38;
+    }
+
+    .section {
+      margin-top: 14px;
+      border: 1px solid rgba(126, 158, 218, 0.28);
+      border-radius: 16px;
+      background: linear-gradient(168deg, rgba(16, 29, 58, 0.94), rgba(13, 24, 49, 0.95));
+      box-shadow: var(--shadow-md);
+      padding: 16px;
+      animation: reveal .72s ease both;
+    }
+
+    .section h4 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 24px;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+    }
+
+    .section p {
+      margin: 8px 0 0;
+      color: #a7b9de;
+      font-size: 17px;
+      line-height: 1.38;
+    }
+
+    .steps {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .step {
+      border: 1px solid rgba(126, 160, 220, 0.30);
+      border-radius: 13px;
+      background: rgba(17, 31, 64, 0.84);
+      padding: 11px;
+    }
+
+    .step b {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 15px;
+      line-height: 1.26;
+      color: #e9f0ff;
+    }
+
+    .step span {
+      margin-top: 4px;
+      display: block;
+      color: #9eb2da;
+      font-size: 14px;
+      line-height: 1.34;
+    }
+
+    .proof-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .metric {
+      border: 1px solid rgba(128, 161, 220, 0.30);
+      border-radius: 12px;
+      background: rgba(18, 33, 66, 0.86);
+      padding: 11px;
+    }
+
+    .metric strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 24px;
+      line-height: 1.12;
+      color: #b8d3ff;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #9cb0d6;
+    }
+
+    .quote {
+      margin-top: 10px;
+      border-left: 4px solid rgba(117, 159, 235, 0.72);
+      padding-left: 10px;
+      color: #bdd2f3;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .hub {
+      margin-top: 14px;
+      border: 1px dashed rgba(131, 166, 226, 0.50);
+      border-radius: 16px;
+      background: linear-gradient(125deg, rgba(16, 33, 70, 0.85), rgba(11, 30, 59, 0.85));
+      padding: 16px;
+      animation: reveal .82s ease both;
+    }
+
+    .hub h5 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 21px;
+      line-height: 1.22;
+      color: #e7efff;
+    }
+
+    .hub p {
+      margin: 8px 0 0;
+      color: #a5b8de;
+      font-size: 16px;
+      line-height: 1.36;
+    }
+
+    .hub-links {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hub-links a {
+      text-decoration: none;
+      border: 1px solid rgba(127, 162, 222, 0.40);
+      background: rgba(14, 28, 59, 0.92);
+      color: #c8daf8;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-family: "Sora", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .hub-links a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(172, 198, 240, 0.66);
+    }
+
+    .hub small {
+      margin-top: 10px;
+      display: block;
+      color: #8fa6d2;
+      font-size: 13px;
+    }
+
+    .final {
+      margin-top: 16px;
+      border: 1px solid rgba(132, 166, 224, 0.32);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 15% -20%, rgba(100, 160, 255, 0.14), transparent 35%),
+        linear-gradient(130deg, rgba(14, 27, 56, 0.95), rgba(16, 30, 63, 0.95));
+      padding: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-md);
+      animation: reveal .92s ease both;
+    }
+
+    .final strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(24px, 3.5vw, 34px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 720px;
+    }
+
+    .final span {
+      margin-top: 6px;
+      display: block;
+      color: #a4b8df;
+      font-size: 15px;
+    }
+
+    .final a {
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: "Sora", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: #071431;
+      background: linear-gradient(95deg, var(--amber), #ffd88d);
+      box-shadow: 0 12px 24px rgba(255, 200, 107, 0.30);
+      transition: transform .18s ease;
+    }
+
+    .final a:hover {
+      transform: translateY(-2px);
+    }
+
+    .back {
+      margin-top: 20px;
+      display: inline-flex;
+      text-decoration: none;
+      color: #9ab1dc;
+      font-size: 14px;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      0%,
+      100% {
+        opacity: 0.45;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.06);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .lead {
+        font-size: 17px;
+      }
+
+      .section p,
+      .core-card p,
+      .hub p {
+        font-size: 15px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <header class="topbar">
+      <div class="brand"><span class="power"></span>ВКЛЮЧИ ИИ</div>
+      <span class="chip">Вариант 5: Dark Conversion Blueprint</span>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>Тёмный стиль с фокусом на <span class="hl">конверсию и ясный путь клиента</span></h1>
+          <p class="lead">Версия на базе вашего приоритетного референса: глубже контраст, аккуратная иерархия, системный тон и один главный маршрут к действию.</p>
+          <div class="tags">
+            <span class="tag">Ref #4: тёмная эстетика</span>
+            <span class="tag">Один главный CTA</span>
+            <span class="tag">Готово к platform-first росту</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-main" href="#">Записаться на экскурсию</a>
+            <a class="btn btn-alt" href="#">Посмотреть метод внедрения</a>
+          </div>
+        </div>
+
+        <aside class="route">
+          <h2>Маршрут конверсии</h2>
+          <ul class="flow">
+            <li><span class="idx">1</span>Боль: где сейчас теряются клиенты</li>
+            <li><span class="idx">2</span>Метод: как система решает задачу</li>
+            <li><span class="idx">3</span>Доказательства: кейсы и цифры</li>
+            <li><span class="idx">4</span>Действие: запись на персональную экскурсию</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="core">
+      <article class="core-card">
+        <span class="pill pain">Pain</span>
+        <h3>Где теряется эффективность</h3>
+        <p>Контент и каналы не связаны в одну систему, поэтому клиенту неочевидно, что делать дальше.</p>
+      </article>
+      <article class="core-card">
+        <span class="pill method">Method</span>
+        <h3>Как выстроен процесс</h3>
+        <p>Сначала смыслы и позиционирование, потом AI-автоматизация и масштабирование каналов.</p>
+      </article>
+      <article class="core-card">
+        <span class="pill proof">Proof</span>
+        <h3>На чём держится доверие</h3>
+        <p>Показываем этапы, метрики и конкретные сценарии внедрения под нишу клиента.</p>
+      </article>
+      <article class="core-card">
+        <span class="pill cta">CTA</span>
+        <h3>Куда ведём пользователя</h3>
+        <p>Единая точка входа: “ЭКСКУРСИЯ”, чтобы быстро перевести интерес в конкретный диалог.</p>
+      </article>
+    </section>
+
+    <section class="section">
+      <h4>Методика в 4 шага</h4>
+      <p>Блок снимает тревогу клиента: он видит управляемый процесс, сроки и ожидаемый результат.</p>
+      <div class="steps">
+        <article class="step">
+          <b>1. Диагностика</b>
+          <span>Аудит текущего контента и точек потерь.</span>
+        </article>
+        <article class="step">
+          <b>2. Стратегия</b>
+          <span>Сборка логики касаний и структуры оффера.</span>
+        </article>
+        <article class="step">
+          <b>3. Система</b>
+          <span>Настройка production-пайплайна и автопубликаций.</span>
+        </article>
+        <article class="step">
+          <b>4. Рост</b>
+          <span>Трекинг метрик, итерации и усиление воронки.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h4>Доказательства и цифры</h4>
+      <p>Секция в стиле референса: меньше шума, больше ясных аргументов и прозрачной механики.</p>
+      <div class="proof-grid">
+        <article class="metric">
+          <strong>1 ключевой CTA</strong>
+          <span>Не распыляем внимание пользователя между 5-7 равными кнопками.</span>
+        </article>
+        <article class="metric">
+          <strong>4 модуля подачи</strong>
+          <span>Боль, метод, доказательства и действие в одном ритме.</span>
+        </article>
+      </div>
+      <p class="quote">“Этот вариант темнее и глубже по тону, но сохраняет бизнес-читабельность и конверсионную структуру.”</p>
+    </section>
+
+    <section class="hub">
+      <h5>Link-hub для Instagram кодового слова</h5>
+      <p>После кодового слова ведём не в один канал вслепую, а на управляемую страницу выбора с аналитикой кликов.</p>
+      <div class="hub-links">
+        <a href="#">Telegram: получить разбор</a>
+        <a href="#">MAX: задать вопрос</a>
+        <a href="#">Кейсы: посмотреть примеры</a>
+      </div>
+      <small>UTM: `utm_source=instagram`, `utm_medium=dm|bio`, `utm_campaign=keyword_*`.</small>
+    </section>
+
+    <section class="final">
+      <div>
+        <strong>Вариант 5: тёмный стиль в духе референса №4 + конверсионная архитектура</strong>
+        <span>Можно брать как базу для главной и дальше развернуть в нишевые посадочные страницы.</span>
+      </div>
+      <a href="#">Берём этот стиль</a>
+    </section>
+
+    <a class="back" href="./index.html">← Назад к выбору вариантов</a>
+  </main>
+</body>
+</html>

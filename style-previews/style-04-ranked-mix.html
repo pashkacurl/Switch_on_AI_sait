@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 4 — Ranked Mix (Codearia Focus)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fd;
+      --paper: #ffffff;
+      --ink: #101b31;
+      --muted: #5a6885;
+      --line: #d7e0f0;
+      --blue: #2f6df6;
+      --blue-soft: #e9f0ff;
+      --mint: #ddf8ee;
+      --sun: #ffd07d;
+      --shadow-lg: 0 18px 44px rgba(23, 41, 79, 0.10);
+      --shadow-sm: 0 8px 24px rgba(23, 41, 79, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 95% 2%, #e7efff 0%, transparent 36%),
+        radial-gradient(circle at 6% 18%, #e7fff5 0%, transparent 30%),
+        var(--bg);
+    }
+
+    .wrap {
+      width: min(1140px, 100%);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .topbar {
+      padding: 18px 0 10px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(6px);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      color: var(--ink);
+    }
+
+    .power {
+      width: 24px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      position: relative;
+    }
+
+    .power::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 9px;
+      background: var(--blue);
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .top a {
+      text-decoration: none;
+      color: #1a4cae;
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid #c7d8f6;
+      background: #eff5ff;
+    }
+
+    .hero {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: var(--shadow-lg);
+      padding: clamp(18px, 5vw, 34px);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(32px, 5.6vw, 62px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      max-width: 720px;
+    }
+
+    .h-accent {
+      color: var(--blue);
+    }
+
+    .lead {
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.52;
+      max-width: 600px;
+      font-size: 16px;
+    }
+
+    .chips {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #d8e3f8;
+      background: #f5f8ff;
+      color: #35527f;
+    }
+
+    .cta-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-main {
+      color: #fff;
+      background: linear-gradient(90deg, var(--blue), #6091ff);
+      box-shadow: 0 10px 26px rgba(47, 109, 246, 0.28);
+    }
+
+    .btn-alt {
+      color: #184893;
+      border: 1px solid #c9d9f6;
+      background: #eff5ff;
+    }
+
+    .preview {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .preview h2 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .metric {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .metric-row {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fbfdff;
+      padding: 9px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #3a4d72;
+    }
+
+    .metric-row strong {
+      color: var(--blue);
+      font-size: 14px;
+    }
+
+    .content {
+      width: min(1140px, 100%);
+      margin: 0 auto;
+      padding: 18px 16px 52px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h3 {
+      margin: 10px 0 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 760px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card .k {
+      margin: 0 0 6px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.46;
+      font-size: 14px;
+    }
+
+    .roadmap {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .step {
+      border: 1px solid #dde5f3;
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+    }
+
+    .num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue-soft), var(--mint));
+      color: #234f9e;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.32;
+    }
+
+    .step span {
+      margin-top: 4px;
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .final {
+      margin-top: 16px;
+      border: 1px solid #cfe0f6;
+      background: linear-gradient(135deg, #eef4ff, #fff7e9);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .final strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .final span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .final a {
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 11px 14px;
+      background: linear-gradient(90deg, #ffc86a, var(--sun));
+      color: #1f2531;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 10px 24px rgba(255, 200, 106, 0.35);
+    }
+
+    .back {
+      margin-top: 20px;
+      display: inline-flex;
+      text-decoration: none;
+      color: #4f607d;
+      font-size: 14px;
+    }
+
+    @media (max-width: 940px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="top">
+        <div class="brand"><span class="power"></span>ВКЛЮЧИ ИИ</div>
+        <a href="#">Case-based подход</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <h1>AI-контент-система с фокусом на <span class="h-accent">ясную структуру и практику</span></h1>
+          <p class="lead">Переработанный вариант с акцентом на референс №4: светлый, аккуратный, академичный интерфейс, где быстро считывается путь клиента и ценность продукта.</p>
+          <div class="chips">
+            <span class="chip">Практический формат</span>
+            <span class="chip">Чистая типографика</span>
+            <span class="chip">Логика “от простого к сложному”</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-main" href="#">Записаться на экскурсию</a>
+            <a class="btn btn-alt" href="#">Смотреть демо-структуру</a>
+          </div>
+        </div>
+
+        <aside class="preview">
+          <h2>Preview: обучающий стиль подачи</h2>
+          <div class="metric">
+            <div class="metric-row"><span>Этапы внедрения</span><strong>4 шага</strong></div>
+            <div class="metric-row"><span>Площадки</span><strong>10+</strong></div>
+            <div class="metric-row"><span>Срок запуска</span><strong>~1 месяц</strong></div>
+            <div class="metric-row"><span>Главный CTA</span><strong>ЭКСКУРСИЯ</strong></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="section-head">
+      <h3>Как выглядит структура в стиле референса №4</h3>
+      <p>Меньше “тяжёлого техно”, больше понятной навигации, чистых карточек и визуальной иерархии, как у современных EdTech/AI-платформ.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <p class="k">Позиционирование</p>
+        <p>Система, которая помогает стать видимым для нужной аудитории, без ежедневной рутины.</p>
+      </article>
+      <article class="card">
+        <p class="k">Метод</p>
+        <p>Сначала смыслы и стратегия, потом AI и автоматизация публикаций.</p>
+      </article>
+      <article class="card">
+        <p class="k">Доверие</p>
+        <p>Подача через практику, цифры и реальные сценарии, а не абстрактные обещания.</p>
+      </article>
+      <article class="card">
+        <p class="k">Конверсия</p>
+        <p>Один маршрут: соцсети → Telegram → видеоурок → экскурсия/клуб.</p>
+      </article>
+    </section>
+
+    <section class="roadmap">
+      <article class="step">
+        <div class="num">1</div>
+        <strong>Intro-блок</strong>
+        <span>Коротко про проблему и результат</span>
+      </article>
+      <article class="step">
+        <div class="num">2</div>
+        <strong>Методика</strong>
+        <span>4 понятных шага внедрения</span>
+      </article>
+      <article class="step">
+        <div class="num">3</div>
+        <strong>Доказательства</strong>
+        <span>Кейсы, цифры, экономика</span>
+      </article>
+      <article class="step">
+        <div class="num">4</div>
+        <strong>CTA</strong>
+        <span>Записаться на персональную экскурсию</span>
+      </article>
+    </section>
+
+    <section class="final">
+      <div>
+        <strong>Вариант 4 (Codearia-focus) — отдельно от стиля 3</strong>
+        <span>Этот макет специально облегчён и сделан более “академичным”, чтобы не повторять гибридную тёмную подачу.</span>
+      </div>
+      <a href="#">Берём этот стиль</a>
+    </section>
+
+    <a class="back" href="./index.html">← Назад к выбору вариантов</a>
+  </main>
+</body>
+</html>
