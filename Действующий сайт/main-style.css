@@ -4910,6 +4910,7 @@ a.pozvona {
 
 }
 
+
 /* ============================================
    БЛОГ — СВЕТЛАЯ ТЕМА, ЗЕЛЁНЫЙ АКЦЕНТ
    switchonai.ru
@@ -5815,4 +5816,35 @@ a.pozvona {
 
 @media (max-width: 480px) {
     .blog-useful-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ===== АРХИВ / РУБРИКА (archive.php) ===== */
+.archive-header {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 28px 24px 0;
+}
+
+.archive-header-inner {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 24px 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.archive-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+}
+
+.archive-desc {
+    font-size: 15px;
+    color: #888;
+    margin-top: 8px;
+    line-height: 1.5;
 }
