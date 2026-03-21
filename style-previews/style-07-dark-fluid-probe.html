@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 7 — Dark Fluid Probe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050b16;--bg2:#0a1326;--panel:rgba(12,23,47,.78);--panel2:rgba(15,28,58,.94);--line:rgba(149,182,236,.18);--text:#edf4ff;--muted:#9fb1cf;--blue:#6f9fff;--mint:#58e1c4;--gold:#ffd27d;--shadow:0 26px 70px rgba(0,0,0,.42);--r1:42px;--r2:30px;--r3:22px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Manrope",sans-serif;color:var(--text);background:radial-gradient(circle at 12% 10%,rgba(88,225,196,.16),transparent 26%),radial-gradient(circle at 86% 12%,rgba(111,159,255,.22),transparent 30%),linear-gradient(180deg,#040914,#091120 48%,#050a14);min-height:100vh;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.28;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg,#000,transparent 88%)}
+    a{text-decoration:none;color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:0 auto;position:relative;z-index:1}
+    .top{position:sticky;top:12px;z-index:40;padding-top:14px}.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(8,16,32,.74);backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+    .brand{display:inline-flex;align-items:center;gap:12px;font-family:"Sora",sans-serif;font-weight:700}.mark{width:30px;aspect-ratio:1;border-radius:50%;border:2px solid var(--mint);box-shadow:0 0 24px rgba(88,225,196,.32);position:relative}.mark:before{content:"";position:absolute;width:2px;height:11px;background:var(--mint);top:-6px;left:50%;transform:translateX(-50%)}
+    .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}.nav a{padding:10px 14px;border-radius:999px;border:1px solid rgba(149,182,236,.14);background:rgba(16,28,56,.58);color:#c0d1ed;font-size:13px;font-weight:700}.nav .cta{background:linear-gradient(90deg,var(--mint),#9cf4e0);color:#071321;border-color:transparent;box-shadow:0 16px 30px rgba(88,225,196,.24)}
+    .hero,.shell,.cta-shell{position:relative;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+    .hero{margin-top:18px;padding:clamp(28px,5vw,54px);border-radius:48px;background:radial-gradient(circle at 12% 18%,rgba(88,225,196,.12),transparent 24%),radial-gradient(circle at 88% 12%,rgba(111,159,255,.20),transparent 32%),linear-gradient(135deg,rgba(8,15,29,.95),rgba(10,19,38,.92) 54%,rgba(12,24,49,.98))}
+    .hero-grid,.home-grid,.proof-grid,.story-grid,.blog-grid,.cta-grid{display:grid;gap:18px}.hero-grid{grid-template-columns:1.08fr .92fr;align-items:center}
+    .eyebrow,.tag,.mini{display:inline-flex;width:fit-content;padding:8px 13px;border-radius:999px;font-size:12px;font-weight:800}.eyebrow{background:rgba(88,225,196,.12);border:1px solid rgba(88,225,196,.22);color:#acefe0}.tag,.mini{background:rgba(255,255,255,.05);border:1px solid rgba(149,182,236,.16);color:#c7d7f2}
+    h1,h2,h3{margin:0;font-family:"Sora",sans-serif;letter-spacing:-.03em}h1{margin-top:18px;font-size:clamp(40px,6.5vw,82px);line-height:.95;max-width:780px}h2{font-size:clamp(28px,4vw,50px);line-height:.98}h3{font-size:clamp(20px,2.5vw,28px);line-height:1.06}
+    .hl{color:var(--mint)}.lead,.copy{margin:18px 0 0;color:var(--muted);line-height:1.62}.lead{font-size:clamp(17px,2vw,21px);max-width:720px}.actions,.chips,.cloud{display:flex;flex-wrap:wrap;gap:12px}.actions{margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 20px;border-radius:999px;font-family:"Sora",sans-serif;font-size:15px;font-weight:700}.btn-main{background:linear-gradient(95deg,var(--mint),#d7fff6);color:#071321;box-shadow:0 20px 34px rgba(88,225,196,.22)}.btn-alt{border:1px solid rgba(149,182,236,.22);background:rgba(16,29,57,.84);color:#edf4ff}
+    .art{min-height:540px;border-radius:42px;background:radial-gradient(circle at 24% 18%,rgba(88,225,196,.14),transparent 22%),radial-gradient(circle at 82% 16%,rgba(111,159,255,.18),transparent 28%),linear-gradient(180deg,rgba(14,27,52,.88),rgba(11,22,43,.94));border:1px solid rgba(149,182,236,.16);position:relative;padding:22px}.art:before{content:"";position:absolute;inset:auto 34px 46px auto;width:240px;height:240px;border-radius:36% 64% 58% 42% / 39% 39% 61% 61%;border:1px solid rgba(149,182,236,.14);background:linear-gradient(180deg,rgba(20,38,74,.44),rgba(12,24,48,.10));transform:rotate(16deg)}
+    .orb,.orb2,.node,.line,.note,.panel,.step,.proof,.story,.article,.side{position:absolute}.orb{width:280px;height:280px;border-radius:50%;left:60px;top:70px;border:1px solid rgba(149,182,236,.14)}.orb2{width:170px;height:170px;border-radius:50%;right:78px;top:150px;border:1px solid rgba(149,182,236,.14)}.node{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,#effcff 0,var(--mint) 38%,rgba(88,225,196,.2) 74%);box-shadow:0 0 22px rgba(88,225,196,.38)}.n1{left:86px;top:112px}.n2{right:86px;top:178px}.n3{left:148px;top:284px}.n4{right:142px;bottom:124px;background:radial-gradient(circle,#eef4ff 0,var(--blue) 40%,rgba(111,159,255,.2) 74%);box-shadow:0 0 22px rgba(111,159,255,.38)}.line{height:2px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(149,182,236,.32),transparent)}.l1{width:250px;left:104px;top:136px;transform:rotate(18deg)}.l2{width:220px;left:128px;top:274px;transform:rotate(-16deg)}.l3{width:230px;left:154px;bottom:112px;transform:rotate(20deg)}
+    .note{padding:16px;border:1px solid var(--line);background:rgba(14,28,56,.82);backdrop-filter:blur(14px);box-shadow:var(--shadow)}.note strong{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.03em}.note p{margin:8px 0 0;color:#a8bbdc;font-size:13px;line-height:1.46}.a{top:26px;right:18px;max-width:216px;border-radius:26px 26px 12px 26px}.b{left:14px;bottom:124px;max-width:212px;border-radius:28px 28px 28px 12px}.c{right:30px;bottom:26px;max-width:196px;border-radius:22px 30px 30px 30px}
+    .section{padding:22px 0}.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:20px}.copy-wrap{max-width:760px}.band{padding:18px 20px;border-radius:999px;border:1px solid rgba(255,210,125,.16);background:linear-gradient(90deg,rgba(255,210,125,.08),rgba(255,255,255,.04));color:#f6e6bc;line-height:1.5}
+    .shell{padding:clamp(22px,3vw,34px);border-radius:44px;background:radial-gradient(circle at 86% 10%,rgba(111,159,255,.14),transparent 30%),linear-gradient(180deg,rgba(13,23,46,.88),rgba(10,19,39,.92))}
+    .home-grid{grid-template-columns:1.04fr .96fr}.curve{min-height:100%;padding:26px;border-radius:42px 42px 16px 42px;background:radial-gradient(circle at 82% 18%,rgba(88,225,196,.12),transparent 28%),linear-gradient(180deg,rgba(16,31,60,.9),rgba(12,22,44,.95));border:1px solid rgba(149,182,236,.14)}.cloud{margin-top:18px;gap:10px}.cloud span{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(149,182,236,.14);color:#d5e2f8;font-size:13px;font-weight:700}
+    .stack{display:grid;gap:14px;margin-top:16px}.panel{position:relative;padding:18px 18px 16px;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(16px);box-shadow:var(--shadow)}.panel p{margin:10px 0 0;color:var(--muted);font-size:15px;line-height:1.6}.stack .panel:nth-child(1){border-radius:28px}.stack .panel:nth-child(2){transform:translateX(22px);border-radius:34px 18px 34px 34px}.stack .panel:nth-child(3){transform:translateX(-10px);border-radius:22px 34px 34px 34px}
+    .steps{display:grid;gap:18px;margin-top:24px;position:relative}.steps:before{content:"";position:absolute;left:28px;top:18px;bottom:18px;width:2px;background:linear-gradient(180deg,rgba(88,225,196,.38),rgba(111,159,255,.1));border-radius:999px}.step{position:relative;display:grid;grid-template-columns:70px 1fr;gap:18px;padding:22px;border:1px solid var(--line);background:var(--panel2);backdrop-filter:blur(16px);box-shadow:var(--shadow)}.step:nth-child(odd){margin-right:52px;border-radius:18px 34px 34px 34px}.step:nth-child(even){margin-left:52px;border-radius:34px 18px 34px 34px}.num{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:"Sora",sans-serif;font-size:18px;font-weight:700;background:linear-gradient(180deg,rgba(88,225,196,.18),rgba(111,159,255,.16));border:1px solid rgba(149,182,236,.18)}.step p,.proof p,.story p,.article p,.side p{margin:10px 0 0;color:var(--muted);font-size:15px;line-height:1.6}
+    .proof-grid,.cta-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof,.story,.article,.side{position:relative;padding:22px;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(16px);box-shadow:var(--shadow)}.proof{border-radius:34px;background:radial-gradient(circle at 88% 14%,rgba(88,225,196,.10),transparent 24%),linear-gradient(180deg,rgba(14,27,54,.94),rgba(11,22,43,.96))}.proof.alt{border-radius:20px 34px 34px 34px}.metrics{margin-top:16px;display:grid;gap:10px}.metrics div{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:18px;border:1px solid rgba(149,182,236,.14);background:rgba(255,255,255,.04);color:#d0e0fa;font-size:14px;font-weight:700}.metrics strong{color:var(--mint)}
+    .story-grid{grid-template-columns:.88fr 1.12fr}.portrait{min-height:360px;border-radius:42px 20px 42px 42px;border:1px solid rgba(149,182,236,.16);background:radial-gradient(circle at 30% 20%,rgba(88,225,196,.18),transparent 24%),radial-gradient(circle at 80% 18%,rgba(111,159,255,.20),transparent 26%),linear-gradient(180deg,rgba(14,27,53,.96),rgba(8,16,31,.98));position:relative;overflow:hidden;box-shadow:var(--shadow)}.portrait:before{content:"Павел";position:absolute;left:26px;bottom:28px;font-family:"Sora",sans-serif;font-size:clamp(28px,5vw,44px);letter-spacing:-.04em;color:rgba(237,244,255,.96)}.portrait:after{content:"";position:absolute;width:280px;height:280px;right:-24px;bottom:-38px;border-radius:52% 48% 40% 60% / 42% 48% 52% 58%;background:radial-gradient(circle,rgba(111,159,255,.22),transparent 70%)}.story{border-radius:42px;background:radial-gradient(circle at 82% 18%,rgba(88,225,196,.12),transparent 32%),linear-gradient(180deg,rgba(15,28,56,.94),rgba(11,21,42,.96))}.facts{margin-top:18px;display:grid;gap:12px}.facts div{padding:14px 16px;border-radius:18px;border:1px solid rgba(149,182,236,.14);background:rgba(255,255,255,.04);color:#d2def5;line-height:1.48}
+    .blog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.article{border-radius:36px;background:linear-gradient(180deg,rgba(14,27,54,.94),rgba(11,22,43,.96))}.article:nth-child(2){border-radius:18px 36px 36px 36px;transform:translateY(16px)}.article:nth-child(3){border-radius:36px 18px 36px 36px}.article strong{color:#bcd2f6;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+    .cta-shell{padding:clamp(24px,4vw,34px);border-radius:46px;background:radial-gradient(circle at 18% 16%,rgba(88,225,196,.14),transparent 26%),radial-gradient(circle at 88% 14%,rgba(111,159,255,.20),transparent 28%),linear-gradient(125deg,rgba(10,19,37,.96),rgba(13,26,54,.98))}.side{border-radius:24px;background:rgba(255,255,255,.05);box-shadow:none}.footer{padding:24px 0 48px;text-align:center;color:#8da4cb;font-size:14px}
+    @media(max-width:1100px){.hero-grid,.home-grid,.proof-grid,.story-grid,.blog-grid,.cta-grid{grid-template-columns:1fr}.art{min-height:500px}}
+    @media(max-width:820px){.bar{border-radius:30px;align-items:flex-start}.nav{justify-content:flex-start}.step:nth-child(odd),.step:nth-child(even),.article:nth-child(2){margin:0;transform:none}.steps:before{left:24px}.art{min-height:460px}.note{position:static;max-width:none;margin-top:12px}}
+    @media(max-width:640px){.wrap{width:min(100% - 18px,1220px)}.top{top:8px}.bar{padding:12px;border-radius:26px}.step{grid-template-columns:1fr}.steps:before{display:none}.hero,.shell,.cta-shell,.curve,.step,.proof,.story,.article,.side{padding-left:18px;padding-right:18px}.art{min-height:420px;padding:18px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap bar"><a class="brand" href="#intro"><span class="mark"></span><span>ВКЛЮЧИ ИИ • Dark Probe</span></a><nav class="nav"><a href="#home">Home</a><a href="#method">Method</a><a href="#proof">Proof</a><a href="#about">About</a><a href="#blog">Blog</a><a class="cta" href="#contact">Экскурсия</a></nav></div></header>
+  <main class="wrap">
+    <section class="hero" id="intro">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Dark-first visual probe</span>
+          <h1>Не просто сайт про AI, а <span class="hl">темная сценография системы</span>, в которую хочется зайти</h1>
+          <p class="lead">Этот вариант уже не про светлый structural-wireframe. Здесь визуальный язык плотнее, глубже и мягче: плавные формы, большие радиусы, темные поверхности и ощущение, что перед человеком не шаблон, а собранная экосистема.</p>
+          <div class="actions"><a class="btn btn-main" href="#home">Смотреть экраны</a><a class="btn btn-alt" href="#contact">Оценить вход в воронку</a></div>
+          <div class="chips" style="margin-top:18px"><span class="mini">Темный базовый режим</span><span class="mini">Меньше квадратов</span><span class="mini">Больше пластики и ритма</span></div>
+        </div>
+        <aside class="art">
+          <span class="orb"></span><span class="orb2"></span><span class="line l1"></span><span class="line l2"></span><span class="line l3"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="node n4"></span>
+          <div class="note a"><strong>Главная мысль</strong><p>Контент как система, а не поток случайных публикаций.</p></div>
+          <div class="note b"><strong>Маршрут</strong><p>Смысл → структура → AI-ядро → публикация → доверие.</p></div>
+          <div class="note c"><strong>Proof</strong><p>Артефакты, сценарии, ownership model, а не fake цифры.</p></div>
+        </aside>
+      </div>
+    </section>
+    <section class="section"><div class="band">Ощущение должно быть таким: ты заходишь не на “очередной лендинг про нейросети”, а в собранную темную систему с характером, глубиной и своим визуальным кодом.</div></section>
+    <section class="section" id="home">
+      <div class="head"><div class="copy-wrap"><span class="tag">Home</span><h2 style="margin-top:12px">Главная как вход в плотную, но понятную систему</h2><p class="copy">Первый экран должен сообщать не только оффер, но и атмосферу: серьезная работа, технологичная эстетика, маршрут доверия, а не легкий SaaS-шаблон.</p></div></div>
+      <div class="shell">
+        <div class="home-grid">
+          <div class="curve"><span class="mini">Главный оффер</span><h3 style="margin-top:14px">AI-контент-система для бизнеса, который хочет владеть своим вниманием, а не гоняться за контентом</h3><p class="copy">Тут дизайн должен поддерживать идею системы: не стерильная B2B-подача, а уверенный темный интерфейс, где чувствуется архитектура, глубина и ручная настройка под конкретный метод.</p><div class="cloud"><span>Не еще один подрядчик</span><span>Не автоматизация ради автоматизации</span><span>Не поток одинаковых постов</span><span>Свой актив, а не зависимость</span></div></div>
+          <div class="stack">
+            <div class="panel"><span class="mini">Для кого</span><p>Эксперты, предприниматели, агентства и B2B-команды, которым нужен контроль над смыслом, темпом и качеством контента.</p></div>
+            <div class="panel"><span class="mini">В чем боль</span><p>Контент живет рывками, AI ускоряет шум, а сайт, блог и оффер не работают как единая система доверия.</p></div>
+            <div class="panel"><span class="mini">Куда ведем</span><p>К экскурсии по системе, где человек понимает модель, ограничения, маршрут внедрения и следующий осмысленный шаг.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="method">
+      <div class="head"><div class="copy-wrap"><span class="tag">How It Works</span><h2 style="margin-top:12px">Метод не в квадратах-таблицах, а в живом маршруте</h2><p class="copy">Здесь я специально ушел от одинаковых карточек. Для этой страницы лучше работает текучая линия процесса: шаги смещаются, ритм дышит, и визуально видно, что это путь, а не “набор преимуществ”.</p></div></div>
+      <div class="steps">
+        <article class="step"><div class="num">01</div><div><span class="mini">Распаковка</span><h3 style="margin-top:10px">Собираем смыслы, аудиторию и реальные точки ценности</h3><p>Без этого любой AI будет просто ускорять хаос. Поэтому маршрут начинается не с технологии, а с упаковки метода, продукта и логики внимания.</p></div></article>
+        <article class="step"><div class="num">02</div><div><span class="mini">Архитектура</span><h3 style="margin-top:10px">Строим систему страниц, блога, сценариев и CTA</h3><p>Сайт перестает быть набором экранов и становится рабочей маркетинговой инфраструктурой, где каждая страница знает свою роль.</p></div></article>
+        <article class="step"><div class="num">03</div><div><span class="mini">AI-ядро</span><h3 style="margin-top:10px">Подключаем ассистентов и контуры публикации</h3><p>Не “волшебная кнопка”, а набор понятных ролей: генерация, редактура, адаптация под каналы, GEO-ready материалы, proof-артефакты.</p></div></article>
+        <article class="step"><div class="num">04</div><div><span class="mini">Запуск</span><h3 style="margin-top:10px">Собираем управляемую систему, которую можно поддерживать</h3><p>На выходе остается не просто красивый сайт и не просто набор промптов, а понятная модель, которой владеешь ты, а не внешний исполнитель.</p></div></article>
+      </div>
+    </section>
+    <section class="section" id="proof">
+      <div class="head"><div class="copy-wrap"><span class="tag">Proof</span><h2 style="margin-top:12px">Доверие собирается через глубину и фактуру</h2><p class="copy">Здесь дизайн должен быть дорогим и уверенным, но не крикливым. Вместо случайных отзывов и липовых цифр показываем то, что реально цитируется, пересказывается и выглядит правдоподобно.</p></div></div>
+      <div class="proof-grid">
+        <article class="proof alt"><span class="mini">Proof layer 1</span><h3 style="margin-top:12px">Скриншоты, контуры и фрагменты рабочих систем</h3><p>Гораздо сильнее работают маршрут идеи, контентное ядро, логика канала и связка с блогом, чем десяток случайных цифр без контекста.</p><div class="metrics"><div><span>Что публикуем</span><strong>только подтверждаемое</strong></div><div><span>Что усиливаем</span><strong>метод и прозрачность</strong></div><div><span>Что избегаем</span><strong>fake proof и vanity metrics</strong></div></div></article>
+        <article class="proof"><span class="mini">Proof layer 2</span><h3 style="margin-top:12px">Экономика, ownership model и честные ограничения</h3><p>Темный стиль тут работает на ощущение серьезной технологичной среды. Но доверие рождается из ясной модели: что делает AI, что делает команда и что остается в активе у клиента.</p><div class="metrics"><div><span>Человек понимает</span><strong>как это внедряется</strong></div><div><span>Человек чувствует</span><strong>контроль вместо магии</strong></div><div><span>Человек запоминает</span><strong>это не очередной SMM-сервис</strong></div></div></article>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <div class="head"><div class="copy-wrap"><span class="tag">About / Entity</span><h2 style="margin-top:12px">Личный слой нужен не для биографии, а для веса</h2><p class="copy">Founder-страница должна усиливать не “посмотрите, какой я”, а происхождение подхода, практику и авторский контур системы.</p></div></div>
+      <div class="story-grid">
+        <div class="portrait"></div>
+        <article class="story"><span class="mini">Entity layer</span><h3 style="margin-top:12px">Павел как архитектор систем, а не просто человек “про нейросети”</h3><p>Такой экран в темном стиле можно сделать очень сильным: спокойным, почти кинематографичным, где чувствуется интеллект, дисциплина и опыт, а не просто “дружелюбный эксперт на фоне градиента”.</p><div class="facts"><div>Практика сначала проверяется на собственных контурах, а потом масштабируется на клиентов.</div><div>Фокус не на “нейросетях ради нейросетей”, а на внимании, структуре, контентной экономике и владении активом.</div><div>Для GEO это еще и entity-узел: экспертность, first-hand materials, согласованность бренда и блога.</div></div></article>
+      </div>
+    </section>
+    <section class="section" id="blog">
+      <div class="head"><div class="copy-wrap"><span class="tag">Blog / GEO Layer</span><h2 style="margin-top:12px">Блог как часть одной вселенной, а не как WordPress-хвост</h2><p class="copy">Карточки здесь сделаны более текучими и разновысотными. Это помогает избежать ощущения “архива статей по шаблону” и собрать блог как knowledge engine внутри общей темной системы.</p></div></div>
+      <div class="blog-grid">
+        <article class="article"><strong>Pillar post</strong><h3 style="margin-top:10px">Что такое AI-контент-система и почему это не просто “пишем через ChatGPT”</h3><p>Статья, на которую можно ссылаться из главной, product-страницы и proof-блоков.</p></article>
+        <article class="article"><strong>Comparison</strong><h3 style="margin-top:10px">AI-система против подрядчика на контент: что контролируешь ты</h3><p>Формат, который работает и на SEO, и на GEO: реальный вопрос и прямой структурный ответ без воды.</p></article>
+        <article class="article"><strong>Proof article</strong><h3 style="margin-top:10px">Из чего состоит рабочий контур публикации, который не разваливается</h3><p>Материал, где можно показать свою систему и одновременно мягко довести человека до экскурсии.</p></article>
+      </div>
+    </section>
+    <section class="section" id="contact">
+      <div class="cta-shell">
+        <div class="cta-grid">
+          <div><span class="eyebrow">Экскурсия</span><h2 style="margin-top:16px">Вход в воронку должен ощущаться дорогим, спокойным и желанным</h2><p class="lead">Не “оставьте заявку и мы вам перезвоним”, а приглашение посмотреть систему изнутри: как она устроена, где ее границы, кому она подходит и что именно можно собрать под твой контур.</p><div class="actions"><a class="btn btn-main" href="#intro">Записаться на экскурсию</a><a class="btn btn-alt" href="#blog">Сначала изучить блог</a></div></div>
+          <div class="cta-grid" style="grid-template-columns:1fr">
+            <div class="side"><h3>Что человек должен почувствовать</h3><p>Что перед ним не “услуга на коленке”, а хорошо собранная среда, в которую можно безопасно зайти.</p></div>
+            <div class="side"><h3>Что человек должен понять</h3><p>Что маршрут прозрачен, технология подчинена задаче, а следующая точка входа логична и не давит.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="footer">Вариант 7 — dark-first visual probe. Это уже ближе к направлению “темно, глубоко, с характером”, а не к светлому структурному макету.</p>
+  </main>
+</body>
+</html>

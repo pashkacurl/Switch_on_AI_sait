@@ -1,33 +1,35 @@
-<!-- ===== FOOTER ===== -->
 <footer class="footer" id="contacts">
     <div class="container">
         <div class="footer-content">
             <div class="footer-brand">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-                    <div class="logo-mark">AI</div>
+                    <div class="logo-mark" aria-hidden="true">
+                        <span class="logo-mark-stick"></span>
+                    </div>
                     <span><?php bloginfo('name'); ?></span>
                 </a>
                 <p>
                     <?php
                     $description = get_bloginfo('description', 'display');
-                    echo $description ? esc_html($description) : 'Экосистема AI-решений для людей и бизнеса. Помогаем освобождать время и усиливать мышление.';
+                    echo $description ? esc_html($description) : 'AI-контент-система для бизнеса и экспертов: смысл, архитектура, AI-ядро, публикация и управляемый маршрут доверия.';
                     ?>
                 </p>
                 <div class="footer-social">
                     <?php
                     $telegram_url = switchonai_get_option('social_telegram');
-                    $youtube_url = switchonai_get_option('social_youtube');
-                    $vk_url = switchonai_get_option('social_vk');
+                    $youtube_url  = switchonai_get_option('social_youtube');
+                    $vk_url       = switchonai_get_option('social_vk');
 
-                    if ($telegram_url) : ?>
+                    if ($telegram_url) :
+                        ?>
                         <a href="<?php echo esc_url($telegram_url); ?>" aria-label="Telegram" target="_blank" rel="noopener noreferrer">TG</a>
-                    <?php endif;
+                    <?php endif; ?>
 
-                    if ($youtube_url) : ?>
+                    <?php if ($youtube_url) : ?>
                         <a href="<?php echo esc_url($youtube_url); ?>" aria-label="YouTube" target="_blank" rel="noopener noreferrer">YT</a>
-                    <?php endif;
+                    <?php endif; ?>
 
-                    if ($vk_url) : ?>
+                    <?php if ($vk_url) : ?>
                         <a href="<?php echo esc_url($vk_url); ?>" aria-label="VK" target="_blank" rel="noopener noreferrer">VK</a>
                     <?php endif; ?>
                 </div>
@@ -39,12 +41,12 @@
                 </div>
             <?php else : ?>
                 <div class="footer-column">
-                    <h4>Услуги</h4>
+                    <h4>Система</h4>
                     <ul>
-                        <li><a href="#">Контент-завод</a></li>
-                        <li><a href="#">Чат-боты</a></li>
-                        <li><a href="#">Автоматизация</a></li>
-                        <li><a href="#">Обучение</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#home')); ?>">Главная</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#method')); ?>">Метод</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#proof')); ?>">Proof</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#contact')); ?>">Экскурсия</a></li>
                     </ul>
                 </div>
             <?php endif; ?>
@@ -55,12 +57,12 @@
                 </div>
             <?php else : ?>
                 <div class="footer-column">
-                    <h4>Компания</h4>
+                    <h4>Материалы</h4>
                     <ul>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Кейсы</a></li>
-                        <li><a href="#">Блог</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#about')); ?>">О Павле</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#blog')); ?>">Блог</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#proof')); ?>">Доверие</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/#contact')); ?>">Контакты</a></li>
                     </ul>
                 </div>
             <?php endif; ?>

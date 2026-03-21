@@ -8,37 +8,40 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- ===== HEADER ===== -->
 <header class="header" id="header">
     <div class="container">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-            <div class="logo-mark">AI</div>
+            <div class="logo-mark" aria-hidden="true">
+                <span class="logo-mark-stick"></span>
+            </div>
             <span><?php bloginfo('name'); ?></span>
         </a>
 
         <?php if (has_nav_menu('primary')) : ?>
             <nav class="nav">
                 <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'menu_class'     => '',
-                    'fallback_cb'    => false,
-                    'depth'          => 1,
-                ));
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'primary',
+                        'container'      => false,
+                        'menu_class'     => '',
+                        'fallback_cb'    => false,
+                        'depth'          => 1,
+                    )
+                );
                 ?>
             </nav>
         <?php else : ?>
             <nav class="nav">
-                <a href="<?php echo esc_url(home_url('/#services')); ?>">Система</a>
-                <a href="<?php echo esc_url(home_url('/#process')); ?>">Как это работает</a>
-                <a href="<?php echo esc_url(home_url('/#cases')); ?>">Сценарии</a>
-                <a href="<?php echo esc_url(home_url('/#faq')); ?>">FAQ</a>
-                <a href="<?php echo esc_url(home_url('/#contacts')); ?>">Контакты</a>
+                <a href="<?php echo esc_url(home_url('/#home')); ?>">Главная</a>
+                <a href="<?php echo esc_url(home_url('/#method')); ?>">Метод</a>
+                <a href="<?php echo esc_url(home_url('/#proof')); ?>">Proof</a>
+                <a href="<?php echo esc_url(home_url('/#about')); ?>">О Павле</a>
+                <a href="<?php echo esc_url(home_url('/#blog')); ?>">Блог</a>
             </nav>
         <?php endif; ?>
 
-        <a href="<?php echo esc_url(home_url('/#cta')); ?>" class="btn btn-glass header-cta">Экскурсия</a>
+        <a href="<?php echo esc_url(home_url('/#contact')); ?>" class="btn btn-glass header-cta">Экскурсия</a>
 
         <button class="mobile-menu-btn" aria-label="Меню">
             <span></span>

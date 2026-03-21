@@ -21,3 +21,5 @@
 | 2026-03-21 | Active theme copy must avoid unverified proof, vanity metrics and fake testimonials | Текущий proof base еще собирается, поэтому доверие строим через метод, прозрачность и реалистичные ожидания | approved |
 | 2026-03-21 | Base WordPress template coverage should be completed before deeper page architecture work | Без `page/single/home/archive/search/404` покрытие темы остается хрупким и блокирует интеграцию блога и контента | approved |
 | 2026-03-21 | Корень репозитория держать навигационным, а не файловой свалкой | Дубликаты PDF и media уже нормализованы в `iSite/`, поэтому в корне остаются только код, docs и явные reference layers | approved |
+| 2026-03-21 | Visual probe переводим в dark-first направление | Светлый `style-06` не попал в ожидаемую атмосферу бренда; нужен более выразительный темный язык с плавными формами и меньшей “квадратностью” | approved |
+| 2026-03-21 | `style-07-dark-fluid-probe.html` использовать как визуальную базу для live front page | Пользователь подтвердил, что этот dark-first язык уже попадает в нужное ощущение бренда, поэтому переносим его в `wordpress-theme/front-page.php` | approved |
