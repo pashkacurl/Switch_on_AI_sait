@@ -2,44 +2,44 @@
 <section class="cases" id="cases">
     <div class="container">
         <div class="section-header center reveal">
-            <span class="section-label">Кейсы</span>
-            <h2>Результаты клиентов</h2>
+            <span class="section-label">Сценарии</span>
+            <h2>Где система полезна на практике</h2>
             <p class="section-description">
-                Реальные цифры и достижения
+                Ниже не “нарисованные кейсы”, а типовые сценарии, где такой контур особенно полезен
             </p>
         </div>
 
         <div class="cases-grid">
             <div class="case-card reveal">
                 <div class="case-image">
-                    <span class="case-tag">Автоматизация</span>
+                    <span class="case-tag">Эксперт</span>
                 </div>
                 <div class="case-content">
-                    <h3>Интернет-магазин одежды</h3>
-                    <p>Внедрили чат-бота для обработки заказов и консультирования клиентов в Telegram и WhatsApp</p>
-                    <div class="case-result">↑ 40% конверсии в заказ</div>
+                    <h3>Личный бренд и экспертный поток</h3>
+                    <p>Когда у бизнеса есть экспертиза, но нет регулярного присутствия: статьи, Telegram, адаптации под площадки и понятный маршрут внимания.</p>
+                    <div class="case-result">Фокус: регулярность и видимость</div>
                 </div>
             </div>
 
             <div class="case-card reveal">
                 <div class="case-image">
-                    <span class="case-tag">Контент</span>
+                    <span class="case-tag">Агентство</span>
                 </div>
                 <div class="case-content">
-                    <h3>Маркетинговое агентство</h3>
-                    <p>Настроили контент-завод для 15 клиентов агентства с автоматической генерацией постов</p>
-                    <div class="case-result">↓ 70% времени на контент</div>
+                    <h3>Контент-движок для команды</h3>
+                    <p>Когда идей и задач много, а производство контента упирается в хаос, ручные согласования и постоянный старт с нуля.</p>
+                    <div class="case-result">Фокус: скорость без потери смысла</div>
                 </div>
             </div>
 
             <div class="case-card reveal">
                 <div class="case-image">
-                    <span class="case-tag">Обучение</span>
+                    <span class="case-tag">B2B</span>
                 </div>
                 <div class="case-content">
-                    <h3>IT-компания</h3>
-                    <p>Обучили команду из 20 человек работе с AI-инструментами для разработки и тестирования</p>
-                    <div class="case-result">↑ 2x продуктивность</div>
+                    <h3>Система контента для сложного продукта</h3>
+                    <p>Когда нужно объяснять сложную ценность, собирать доверие через контент и не зависеть только от сарафана и ручных продаж.</p>
+                    <div class="case-result">Фокус: доверие и входящий спрос</div>
                 </div>
             </div>
         </div>

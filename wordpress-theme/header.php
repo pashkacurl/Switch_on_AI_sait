@@ -30,15 +30,15 @@
             </nav>
         <?php else : ?>
             <nav class="nav">
-                <a href="#services">Услуги</a>
-                <a href="#cases">Кейсы</a>
-                <a href="#training">Обучение</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contacts">Контакты</a>
+                <a href="<?php echo esc_url(home_url('/#services')); ?>">Система</a>
+                <a href="<?php echo esc_url(home_url('/#process')); ?>">Как это работает</a>
+                <a href="<?php echo esc_url(home_url('/#cases')); ?>">Сценарии</a>
+                <a href="<?php echo esc_url(home_url('/#faq')); ?>">FAQ</a>
+                <a href="<?php echo esc_url(home_url('/#contacts')); ?>">Контакты</a>
             </nav>
         <?php endif; ?>
 
-        <a href="#cta" class="btn btn-glass header-cta">Консультация</a>
+        <a href="<?php echo esc_url(home_url('/#cta')); ?>" class="btn btn-glass header-cta">Экскурсия</a>
 
         <button class="mobile-menu-btn" aria-label="Меню">
             <span></span>

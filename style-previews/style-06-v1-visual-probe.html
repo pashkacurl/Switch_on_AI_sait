@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вариант 6 — V1 Visual Probe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f3f6fc;--card:#ffffffd9;--ink:#10203a;--muted:#5d6d8a;--line:#d5e0f6;--blue:#2f6dff;--blue2:#5d90ff;--navy:#0c1732;--shadow:0 22px 60px rgba(21,40,80,.12);--shadow-sm:0 12px 24px rgba(21,40,80,.08)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Manrope",sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 5%,rgba(114,172,255,.18)0,transparent 24%),radial-gradient(circle at 92% 10%,rgba(146,235,198,.18)0,transparent 20%),var(--bg)}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(1180px,calc(100% - 24px));margin:0 auto}
+    .top{position:sticky;top:10px;z-index:20;padding:14px 0}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:18px;background:#ffffffc7;backdrop-filter:blur(14px);box-shadow:var(--shadow-sm)}
+    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800}
+    .mark{width:24px;aspect-ratio:1;border-radius:50%;border:2px solid var(--blue);position:relative}.mark:before{content:"";position:absolute;width:2px;height:9px;background:var(--blue);left:50%;top:-5px;transform:translateX(-50%)}
+    .nav{display:flex;flex-wrap:wrap;gap:8px}
+    .nav a{padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:#f6f9ff;font-size:13px;font-weight:700;color:#3f5f91}
+    .nav .cta{background:linear-gradient(90deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}
+    .hero,.page,.footer{border:1px solid var(--line);border-radius:28px;background:var(--card);box-shadow:var(--shadow)}
+    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;padding:clamp(24px,5vw,40px);background:radial-gradient(circle at 90% 8%,rgba(95,154,255,.14)0,transparent 28%),linear-gradient(140deg,#fff,#f7faff)}
+    .eyebrow,.tag,.mini{display:inline-flex;width:fit-content;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800}
+    .eyebrow{background:var(--blue);color:#fff}
+    .tag{background:#eef4ff;color:#204ea9;border:1px solid #d8e5ff}
+    .mini{background:#f4f7fc;color:#496587;border:1px solid #e1e8f7;font-weight:700}
+    h1,h2,h3{margin:0;font-family:"Space Grotesk",sans-serif;letter-spacing:-.03em}
+    h1{margin-top:16px;font-size:clamp(34px,6vw,72px);line-height:.98;max-width:760px}
+    h2{font-size:clamp(26px,4vw,44px);line-height:1.02}
+    .accent{color:var(--blue)}
+    .lead,.copy{margin:16px 0 0;color:var(--muted);line-height:1.58}
+    .lead{font-size:18px;max-width:690px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 18px;border-radius:14px;font-weight:800}
+    .btn-main{background:linear-gradient(90deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 14px 28px rgba(47,109,255,.24)}
+    .btn-alt{background:#f4f8ff;border:1px solid #cfddff;color:#1b4eb4}
+    .panel,.box,.wire{padding:18px;border-radius:18px;border:1px solid var(--line);background:#ffffffeb;box-shadow:var(--shadow-sm)}
+    .panel p,.box p,.wire p{margin:10px 0 0;color:var(--muted);line-height:1.55;font-size:15px}
+    .metric{display:grid;gap:10px;margin-top:14px}
+    .metric div{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid #dfe8f8;border-radius:12px;background:#f8fbff;color:#476180;font-size:13px;font-weight:700}
+    .metric strong{color:var(--blue)}
+    .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .section{padding:26px 0}
+    .page{padding:24px}
+    .surface{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start}
+    .grid3,.grid2{display:grid;gap:14px;margin-top:22px}
+    .grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .dark{background:radial-gradient(circle at 88% 8%,rgba(101,160,255,.18)0,transparent 24%),linear-gradient(145deg,#0c1732,#102046 58%,#132957);color:#eef3ff;border-color:#213863}
+    .dark .tag,.dark .mini{background:#ffffff14;color:#d7e6ff;border-color:#ffffff1f}
+    .dark .copy,.dark .box p,.dark .wire p{color:#afc2e7}
+    .dark .box,.dark .wire{background:#13233f;border-color:#27436f;box-shadow:none}
+    .num{font-family:"Space Grotesk",sans-serif;font-size:34px;color:var(--blue);letter-spacing:-.04em}
+    .dark .num{color:#9ec0ff}
+    .band{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:22px;padding:18px;border:1px solid #d9e6ff;border-radius:20px;background:linear-gradient(90deg,#eef4ff,#fff)}
+    .band p{margin:6px 0 0;color:var(--muted)}
+    .wirelines{display:grid;gap:10px;margin-top:14px}.line{height:12px;border-radius:999px;background:linear-gradient(90deg,#dce8ff,#edf3ff)}.s{width:58%}.m{width:76%}.l{width:100%}
+    .footer{padding:28px;margin:0 0 46px}
+    .footgrid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:14px}
+    .note{margin-top:16px;padding:14px 16px;border-radius:16px;background:#eef4ff;border:1px solid #d7e3fb;color:#476181;line-height:1.55}
+    @media(max-width:980px){.hero,.surface,.footgrid{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
+    @media(max-width:720px){.nav{justify-content:flex-start}.topbar{flex-direction:column;align-items:flex-start}.hero,.page,.footer{padding:20px;border-radius:24px}.grid3{grid-template-columns:1fr}.lead,.copy{font-size:16px}}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap topbar">
+      <a class="brand" href="#intro"><span class="mark"></span><span>ВКЛЮЧИ ИИ • V1 Probe</span></a>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#product">Product</a>
+        <a href="#method">Method</a>
+        <a href="#proof">Proof</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#blog">Blog</a>
+        <a class="cta" href="#contact">Экскурсия</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="section" id="intro">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">V1 visual probe</span>
+          <h1>Сайт, который продает <span class="accent">систему</span>, а не еще один поток постов</h1>
+          <p class="lead">Первый осмысленный пробник под текущую стратегию: AI-контент-система как главный оффер, единый CTA «Экскурсия», честная proof-логика и связка с блогом как knowledge engine.</p>
+          <div class="actions">
+            <a class="btn btn-main" href="#home">Смотреть экраны</a>
+            <a class="btn btn-alt" href="#contact">Оценить маршрут CTA</a>
+          </div>
+          <div class="legend">
+            <span class="mini">Фокус v1: AI-контент-система</span>
+            <span class="mini">Главный CTA: Экскурсия</span>
+            <span class="mini">GEO-ready answer-first blocks</span>
+          </div>
+        </div>
+        <aside>
+          <div class="panel">
+            <h3>Что именно показываю</h3>
+            <p>Не просто hero-концепт, а page surfaces для Home, Product, Method, Proof, About, Contact и Blog layer.</p>
+          </div>
+          <div class="panel" style="margin-top:12px">
+            <h3>Критерии оценки</h3>
+            <div class="metric">
+              <div><span>Ясность оффера за 5 секунд</span><strong>High</strong></div>
+              <div><span>Доверие без fake proof</span><strong>Required</strong></div>
+              <div><span>WordPress-реалистичность</span><strong>Must</strong></div>
+              <div><span>GEO / AI-search readiness</span><strong>Built-in</strong></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="home">
+      <div class="surface">
+        <div>
+          <span class="tag">Home</span>
+          <h2 style="margin-top:14px">AI-контент-система для бизнеса, который устал от хаоса в контенте</h2>
+          <p class="copy">Не найм еще одного подрядчика и не магическая автоматизация. Сначала собираем смыслы, маршрут внимания и экономику контента, потом подключаем AI, публикацию и управляемость.</p>
+          <div class="actions">
+            <a class="btn btn-main" href="#contact">Записаться на экскурсию</a>
+            <a class="btn btn-alt" href="#method">Как это работает</a>
+          </div>
+          <div class="grid3">
+            <div class="box"><span class="mini">Для кого</span><h3>Предприниматели и эксперты</h3><p>Есть продукт, но контент нерегулярный, шумный или слишком дорогой в поддержке.</p></div>
+            <div class="box"><span class="mini">Главная мысль</span><h3>Проблема не в AI</h3><p>Проблема в отсутствии системы, где контент, канал и оффер работают как единое целое.</p></div>
+            <div class="box"><span class="mini">Что обещаем</span><h3>Собственный актив</h3><p>На выходе остается управляемая система, а не новая зависимость от исполнителя.</p></div>
+          </div>
+        </div>
+        <aside class="wire">
+          <h3>Как выглядит page logic</h3>
+          <p>Hero → Для кого → Проблема → Метод → Что на выходе → Proof → FAQ → CTA</p>
+          <div class="wirelines">
+            <div class="line l"></div><div class="line m"></div><div class="line s"></div><div class="line l"></div><div class="line m"></div>
+          </div>
+        </aside>
+      </div>
+      <div class="band">
+        <div><h3>Здесь впервые появляется основной маршрут v1</h3><p>Без давления: сначала понять логику системы и только потом решить, идти ли дальше.</p></div>
+        <a class="btn btn-main" href="#contact">Экскурсия по системе</a>
+      </div>
+    </section>
+
+    <section class="page dark" id="product">
+      <div class="surface">
+        <div>
+          <span class="tag">Product</span>
+          <h2 style="margin-top:14px">Что такое AI-контент-система и почему это не “еще один завод постов”</h2>
+          <p class="copy">Эта страница объясняет продукт глубже: кому подходит, из чего состоит, что получает клиент и как устроено владение системой.</p>
+          <div class="actions">
+            <a class="btn btn-main" href="#contact">Записаться на экскурсию</a>
+            <a class="btn btn-alt" href="#proof">Посмотреть proof</a>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="box"><span class="mini">Что входит</span><h3>Смыслы и позиционирование</h3><p>Распаковка продукта, JTBD, возражений и логики контента до автоматизации.</p></div>
+          <div class="box"><span class="mini">Что входит</span><h3>AI-ядро для производства</h3><p>Не просто промпты, а набор сценариев, из которых собирается контентный конвейер.</p></div>
+          <div class="box"><span class="mini">Что входит</span><h3>Публикация и масштабирование</h3><p>Связка каналов, форматирование, база идей и маршрут публикации.</p></div>
+          <div class="box"><span class="mini">Что остается</span><h3>Прозрачная система у клиента</h3><p>Workflow, правила, точки контроля и понятная модель развития дальше.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="method">
+      <div class="surface">
+        <div>
+          <span class="tag">How it works</span>
+          <h2 style="margin-top:14px">Маршрут из 4 шагов: от распаковки до запуска управляемой системы</h2>
+          <p class="copy">Эта страница снимает тревогу и отвечает на вопрос “а что именно будет происходить”. Здесь не глянцевая магия, а понятный процесс.</p>
+        </div>
+        <aside class="wire">
+          <h3>Answer-first GEO block</h3>
+          <p>AI-контент-система — это связка стратегии, контентного ядра, публикации и точек контроля, а не просто генерация текстов.</p>
+        </aside>
+      </div>
+      <div class="grid3">
+        <div class="box"><span class="mini">Шаг 1</span><h3>Распаковка</h3><p>Собираем смыслы, сегменты, боли и маршрут внимания.</p></div>
+        <div class="box"><span class="mini">Шаг 2</span><h3>Архитектура</h3><p>Собираем структуру контента, роли каналов и системные блоки.</p></div>
+        <div class="box"><span class="mini">Шаг 3</span><h3>Сборка ядра</h3><p>Подключаем AI и автоматизацию в правильном порядке.</p></div>
+      </div>
+    </section>
+
+    <section class="page" id="proof">
+      <div class="surface">
+        <div>
+          <span class="tag">Proof / Cases</span>
+          <h2 style="margin-top:14px">Доверие строится не на придуманных цифрах, а на прозрачной логике и реальных артефактах</h2>
+          <p class="copy">Здесь меньше “50+ клиентов / 98% счастья”, больше процесса, экономики, сценариев применения и first-hand artifacts.</p>
+        </div>
+        <div class="grid2">
+          <div class="box"><span class="mini">Proof layer</span><h3>Открытая лаборатория на себе</h3><p>Скриншоты контуров, структура системы и пример цепочки “идея → канал → лид”.</p></div>
+          <div class="box"><span class="mini">Proof layer</span><h3>Экономика и ownership model</h3><p>Что делается руками, что AI, что автоматикой и что остается активом у клиента.</p></div>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="box"><span class="num">A</span><h3>Эксперт</h3><p>Нужен регулярный контент без превращения в full-time редакцию.</p></div>
+        <div class="box"><span class="num">B</span><h3>Агентство</h3><p>Нужен повторяемый контур производства без ручной сборки с нуля.</p></div>
+        <div class="box"><span class="num">C</span><h3>B2B-команда</h3><p>Нужно выстроить knowledge layer и инфраструктуру вокруг продукта.</p></div>
+      </div>
+    </section>
+
+    <section class="page" id="about">
+      <div class="surface">
+        <div>
+          <span class="tag">About Pavel</span>
+          <h2 style="margin-top:14px">Фаундер-страница как часть доверия, а не как автобиографический монолог</h2>
+          <p class="copy">Роль Павла здесь не “просто эксперт по нейросетям”, а практик и архитектор систем. Это важно и для доверия, и для GEO.</p>
+        </div>
+        <aside class="wire">
+          <h3>Entity layer</h3>
+          <p>Founder signals, expertise, profiles, method origin и единая логика бренда.</p>
+          <div class="wirelines"><div class="line l"></div><div class="line s"></div><div class="line m"></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="contact">
+      <div class="surface">
+        <div>
+          <span class="tag">Contact / Excursion</span>
+          <h2 style="margin-top:14px">Экскурсия как мягкий, но сильный вход в воронку</h2>
+          <p class="copy">Не агрессивная “оставьте заявку”, а понятный следующий шаг: посмотреть систему, задать вопросы и понять ограничения.</p>
+          <div class="actions">
+            <a class="btn btn-main" href="#contact">Записаться на экскурсию</a>
+            <a class="btn btn-alt" href="#blog">Сначала изучить материалы</a>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="box"><span class="mini">Что обещаем</span><h3>Без давления</h3><p>Сначала ясность по модели, применимости и следующему шагу.</p></div>
+          <div class="box"><span class="mini">Что показываем</span><h3>Маршрут системы</h3><p>Из чего состоит контур, где рождается контент и где лежит ценность.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page dark" id="blog">
+      <div class="surface">
+        <div>
+          <span class="tag">Blog / GEO layer</span>
+          <h2 style="margin-top:14px">Блог как knowledge engine, который работает и на SEO, и на выдачу нейросетей</h2>
+          <p class="copy">Блог не висит отдельно: он объясняет термины, снимает возражения, захватывает спрос и перелинковывает человека обратно в Product, Method и Excursion.</p>
+        </div>
+        <aside class="wire">
+          <h3>Что важно для GEO</h3>
+          <p>Entity clarity, явные ответы, first-hand expertise, internal links и snippet-friendly visible text.</p>
+        </aside>
+      </div>
+      <div class="grid3">
+        <div class="box"><span class="mini">Pillar post</span><h3>Что такое AI-контент-система</h3><p>Определение, состав и отличие от “просто постов через ChatGPT”.</p></div>
+        <div class="box"><span class="mini">Comparison</span><h3>AI-система vs SMM-подрядчик</h3><p>Сравнение по управляемости, экономике и ownership.</p></div>
+        <div class="box"><span class="mini">Proof article</span><h3>Из чего состоит рабочий контур публикации</h3><p>Материал, который помогает и доверять, и цитировать.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="footer">
+        <div class="footgrid">
+          <div>
+            <span class="tag">Review note</span>
+            <h2 style="margin-top:14px">Что оценивать в этом пробнике</h2>
+            <p class="copy">Не пиксель-перфект, а направление: оффер, ритм, структура доверия, характер CTA и то, хочется ли после такого сайта идти дальше в Экскурсию.</p>
+          </div>
+          <div class="box"><span class="mini">Сильная сторона</span><h3>Чистая иерархия</h3><p>Один фокус, один вход, меньше визуального шума и больше системности.</p></div>
+          <div class="box"><span class="mini">Следующий шаг</span><h3>Перенос в WordPress</h3><p>После review этот probe можно раскладывать по отдельным шаблонам и reusable sections.</p></div>
+        </div>
+        <div class="note">Если направление близкое, следующим шагом я сделаю более детальный probe или сразу начну переносить его в WordPress-шаблоны ключевых страниц.</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -35,8 +35,8 @@ function switchonai_setup() {
     ));
 
     // Set content width
-    if (!isset($content_width)) {
-        $content_width = 1400;
+    if (!isset($GLOBALS['content_width'])) {
+        $GLOBALS['content_width'] = 1400;
     }
 }
 add_action('after_setup_theme', 'switchonai_setup');
@@ -155,7 +155,7 @@ function switchonai_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_setting('hero_subtitle', array(
-        'default'           => 'Включи жизнь',
+        'default'           => 'Включи систему',
         'sanitize_callback' => 'sanitize_text_field',
     ));
 
@@ -166,7 +166,7 @@ function switchonai_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_setting('hero_description', array(
-        'default'           => 'Помогаю людям и бизнесу внедрять искусственный интеллект — чтобы освободить время, усилить мышление и зарабатывать больше.',
+        'default'           => 'Сначала смыслы и стратегия, затем AI и автоматизация. На выходе — управляемая контент-система, которая помогает бизнесу быть видимым без ежедневной рутины.',
         'sanitize_callback' => 'sanitize_textarea_field',
     ));
 

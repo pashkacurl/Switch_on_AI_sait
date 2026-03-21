@@ -52,4 +52,4 @@ To package the theme: create a ZIP of the `wordpress-theme/` folder.
 - The WordPress theme CSS palette (black/blue/cream from Avtograf Group inspiration) differs from the legacy live site palette (dark navy `#1C1F33` / green `#4cd1a0`)
 - `Действующий сайт/main-style.css` is ~5800 lines and includes styles for a WordPress blog system (slider, post cards, sidebar, single article, breadcrumbs, pagination) starting around line 4913
 - The live site uses custom `.otf` font families (Bold, Medium, Regular, Light) referenced via relative `fonts/` path
-- No `.gitignore` exists — be cautious about committing binary files (PDFs, images, videos in `iSite/05_Медиа/`)
+- A minimal `.gitignore` exists for IDE/OS noise; binary source files still live in `iSite/05_Медиа/`, so be deliberate with large commits

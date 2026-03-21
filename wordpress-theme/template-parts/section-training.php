@@ -3,42 +3,41 @@
     <div class="container">
         <div class="training-content">
             <div class="training-visual reveal">
-                <div class="training-visual-icon">🎓</div>
+                <div class="training-visual-icon">📦</div>
             </div>
 
             <div class="training-text">
-                <span class="section-label reveal">Обучение</span>
-                <h2 class="reveal">Научись работать с <span class="text-accent">ИИ</span></h2>
+                <span class="section-label reveal">Результат</span>
+                <h2 class="reveal">Что остается у вас <span class="text-accent">на выходе</span></h2>
                 <p class="section-description reveal">
-                    Авторские курсы и программы для тех, кто хочет освоить нейросети
-                    и применять их в работе уже сегодня.
+                    Не набор разрозненных действий, а понятная система, которую можно вести дальше без ощущения “все держится на подрядчике”.
                 </p>
 
                 <ul class="training-list">
                     <li class="reveal">
                         <span class="training-list-number">01</span>
                         <div class="training-list-content">
-                            <h4>Базовый курс по ChatGPT</h4>
-                            <p>От основ до продвинутых промптов за 2 недели</p>
+                            <h4>Контент-стратегия под ваш продукт</h4>
+                            <p>Темы, смысловой фокус, маршрут внимания и понятная логика публикаций.</p>
                         </div>
                     </li>
                     <li class="reveal">
                         <span class="training-list-number">02</span>
                         <div class="training-list-content">
-                            <h4>AI для предпринимателей</h4>
-                            <p>Как внедрить ИИ в бизнес-процессы и сэкономить</p>
+                            <h4>AI-ассистенты и workflow</h4>
+                            <p>Промпты, генерация, адаптации и multi-channel поток без постоянного ручного старта.</p>
                         </div>
                     </li>
                     <li class="reveal">
                         <span class="training-list-number">03</span>
                         <div class="training-list-content">
-                            <h4>Корпоративное обучение</h4>
-                            <p>Программы для команд от 5 человек под ваши задачи</p>
+                            <h4>Управление и передача</h4>
+                            <p>Таблица-хаб, точки контроля и понятная система, которую можно вести самому или с командой.</p>
                         </div>
                     </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary reveal">Выбрать курс</a>
+                <a href="#cta" class="btn btn-primary reveal">Посмотреть формат внедрения</a>
             </div>
         </div>
     </div>
