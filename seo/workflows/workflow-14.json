@@ -1,0 +1,989 @@
+{
+  "name": "My workflow 14",
+  "nodes": [
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"items\": [\n  {\n      \"title\": \"...\",\n      \"description\": \"...\"\n    }\n  ]\n  \n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        32
+      ],
+      "id": "271edf64-a093-41d9-880a-3d993c159269",
+      "name": "Structured Output Parser3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=SYSTEM PROMPT — YouTube Transcript → Topic Selection & Briefs\n\nYou are a Content Strategist. Your ONLY task: extract relevant topics from a transcript and write editorial briefs for each. Your output feeds into the next agent in the pipeline.\n\n================================================================\n0) AUTHOR CONTEXT\n================================================================\n\nPavel Leshchenko builds AI content systems for entrepreneurs and experts.\nStarts with meaning extraction, NOT automation.\nSystem is transparent — client owns it, controls it, no dependency.\n\nCore beliefs:\n- \"AI accelerates the system. No system — it accelerates chaos.\"\n- \"A good product nobody sees online is an expensive secret.\"\n- \"Content without meaning extraction is scaled emptiness.\"\n\nNOT an SMM agency. NOT an AI-spam factory. NOT \"just ChatGPT.\"\nNo client cases yet — building first system on himself as a live public case.\nDoes NOT promise: guaranteed sales, full autopilot, instant results.\n\n================================================================\n1) TARGET AUDIENCE\n================================================================\n\nBusiness owners, founders, experts (28-42).\nHave a working product and clients. Content is absent or chaotic.\nAlready tried SMM / courses / ChatGPT — nothing stuck.\n\nSITUATION A — \"Invisible\"\n\"Меня не видно. Конкурент хуже, но он везде — а я невидим.\"\n\nSITUATION B — \"Tried everything, burned out\"\n\"Сколько денег я уже выкинул... Каждый раз одно и то же: обещания → пустота.\"\n\nSITUATION C — \"Manual ceiling\"\n\"Трачу кучу времени, а системы нет. Хочу автоматизировать, но боюсь получить мусор.\"\n\n================================================================\n2) FIVE CONTENT SERIES\n================================================================\n\n0 — AI Tools & Reviews: \"what I use in my system and why\"\nP1 — Why content matters: invisibility costs money\nP2 — Why my approach: meanings first → strategy → transparent system\nP3 — Why this price: one-time asset vs monthly SMM dependency\nP4 — Why now: while you wait, a weaker competitor takes your clients\n\n================================================================\n3) RELEVANCE FILTER\n================================================================\n\nBefore extracting: \"Is this a real pain for an entrepreneur (28-42) who wants online visibility through a content system OR wants to automate content without losing quality?\"\n\nYES → extract and assign to series 0/P1/P2/P3/P4\nNO → discard. Do NOT force connections.\n\nDo NOT extract: topics requiring client case studies, topics unrelated to content/marketing/automation.\nPREFER: topics writable from \"practitioner building a system\" position.\n\nCRITICAL — TRANSCRIPT ISOLATION:\nNEVER use from transcript: brand names, product names, specific numbers, CTAs, offers, slogans, coined terms.\nIf transcript says \"фабрика контента 2.0\" or \"3600 единиц\" or \"YouTube Boost\" or \"экскурсия в отдел\" — do NOT copy. Extract the IDEA, reframe it in Pavel's voice.\n\n================================================================\n4) FOR EACH TOPIC PRODUCE\n================================================================\n\nTITLE = TOPIC NAME (Russian), not a headline. Headline is created by a separate agent.\n- Short, clear topic formulation. What is this article about in one sentence.\n- Contains who it's for and what situation.\n- NO hype, NO clickbait, NO borrowed transcript phrases.\n- Example: \"Автоматизация публикации контента на несколько площадок без потери голоса\"\n\nDESCRIPTION — editorial brief with 4 blocks:\n\n[СИТУАЦИЯ] 1-2 sentences, first person. Reader recognizes their exact situation.\nMust sound like REAL INNER SPEECH, not marketing copy.\nBAD: \"Тратишь огромное количество времени и ресурсов на создание контента\"\nGOOD: \"Ты уже полгода пытаешься вести блог. Иногда пост, иногда месяц тишины. Системы нет.\"\n\n[НАПРЯЖЕНИЕ] What false belief this article challenges. One specific thing.\n\n[СТРУКТУРА СТАТЬИ — 4-6 блоков] Specific subtopics/questions the article covers.\nEach block = a concrete question or angle, written as a sentence.\nBAD (generic, will be rejected): \"Примеры,\" \"Чек-лист,\" \"Пошаговый план,\" \"Частые ошибки и как их избежать,\" \"Метрики и аналитика,\" \"Инструменты и методы\"\nGOOD (specific, grounded): \"Почему SMM-специалист не решает проблему системности,\" \"Что происходит когда конкурент виден а ты нет — разбор потерянного клиента\"\n\n[ПОЧЕМУ ВАЖНО СЕЙЧАС] 1-2 sentences, cost of inaction. Concrete, no drama.\n\n================================================================\n5) RULES\n================================================================\n\nFORBIDDEN WORDS (never use in any block):\n\"гарантированно,\" \"без усилий,\" \"на автопилоте,\" \"вирусно,\" \"секретная схема,\" \"100% результат,\" \"доминировать,\" \"взрывной,\" \"продающий контент,\" \"лиды,\" \"готова купить,\" \"скрытые возможности,\" \"прорыв,\" \"революционный,\" \"уникальный метод.\"\n\nNEVER PROMISE: sales, leads, revenue, specific percentages.\nPavel promises VISIBILITY and SYSTEM — not sales.\n\nTone of descriptions: calm, practical, zero hype.\n\n================================================================\n6) QUALITY CHECK — EVERY TOPIC\n================================================================\n\n[ ] Grounded in transcript, not invented\n[ ] Passes relevance filter\n[ ] Assigned to one series\n[ ] Credible without client case studies\n[ ] Topic: clear, short, no hype, NO borrowed transcript terms\n[ ] Description: all 4 blocks, specific not generic\n[ ] Situation sounds like real inner speech, not marketing copy\n[ ] Structure blocks are specific sentences, not generic labels\n[ ] Tone: no forbidden words, no promises of sales/leads/revenue\n[ ] Zero borrowed brands, numbers, slogans, CTAs from transcript\n\nFail any check → rewrite or discard.\n\n================================================================\n7) QUANTITY\n================================================================\n\nHighly relevant transcript: 5-12 topics.\nPartially relevant: 2-5.\nIrrelevant: empty items array.\n3 strong > 10 weak. Always.\n\n================================================================\n8) OUTPUT FORMAT\n================================================================\n\nReturn ONLY valid JSON, no markdown, no extra text.\n\n{\n  \"items\": [\n    {\n      \"title\": \"...\",\n      \"description\": \"...\"\n    }\n  ]\n}\n\n================================================================\n9) INPUT\n================================================================\n\nTranscript:\n{{ $json['Транскрипция'] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "OUTPUT LANGUAGE: RUSSIAN ONLY"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        224,
+        96
+      ],
+      "id": "8e2f3da3-a798-4f88-859c-ced8b97e4fed",
+      "name": "AI Agent темы статей",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.items",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        560,
+        96
+      ],
+      "id": "2236021c-ba0a-4a52-8d6c-2d76d2acdaf7",
+      "name": "Деление массива2"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "app6G4TaOjNZY0VwG",
+          "mode": "list",
+          "cachedResultName": "Контент-завод",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUcxgedpPoGoT9h",
+          "mode": "list",
+          "cachedResultName": "Темы для статей",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG/tblUcxgedpPoGoT9h"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Тема": "={{ $('Search video3').item.json['Тема'] }}",
+            "primary_keywords": "={{ $json.primary_keywords }}",
+            "secondary_keywords": "={{ $json.secondary_keywords }}",
+            "long_tail_keywords": "={{ $json.long_tail_keywords }}",
+            "Статус": "Написать",
+            "geo_blocks": "={{ $json.geo_blocks }}",
+            "evidence_anchors": "={{ $json.evidence_anchors }}",
+            "draft_snippet": "={{ $json.draft_snippet }}",
+            "perplexity_facts": "={{ $json.perplexity_facts }}",
+            "faq_pairs": "={{ $json.faq_pairs }}"
+          },
+          "matchingColumns": [
+            "Тема"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Описание",
+              "displayName": "Описание",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Ключевые слова",
+              "displayName": "Ключевые слова",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Статус",
+              "displayName": "Статус",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Новый",
+                  "value": "Новый"
+                },
+                {
+                  "name": "Написать",
+                  "value": "Написать"
+                },
+                {
+                  "name": "Опубликовано",
+                  "value": "Опубликовано"
+                },
+                {
+                  "name": "Отказ",
+                  "value": "Отказ"
+                },
+                {
+                  "name": "Прочее",
+                  "value": "Прочее"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Приоритет",
+              "displayName": "Приоритет",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "perplexity_facts",
+              "displayName": "perplexity_facts",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "faq_pairs",
+              "displayName": "faq_pairs",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "primary_keywords",
+              "displayName": "primary_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "secondary_keywords",
+              "displayName": "secondary_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "long_tail_keywords",
+              "displayName": "long_tail_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "geo_blocks",
+              "displayName": "geo_blocks",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "evidence_anchors",
+              "displayName": "evidence_anchors",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "draft_snippet",
+              "displayName": "draft_snippet",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ссылка на видео",
+              "displayName": "Ссылка на видео",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Транскрипция",
+              "displayName": "Транскрипция",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Заголовок",
+              "displayName": "Заголовок",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Статья ДЗЕН",
+              "displayName": "Статья ДЗЕН",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Ссылка на статью в блог",
+              "displayName": "Ссылка на статью в блог",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "entities",
+              "displayName": "entities",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "semantic_requirements",
+              "displayName": "semantic_requirements",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "excluded_angles",
+              "displayName": "excluded_angles",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "negative_keywords",
+              "displayName": "negative_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "allowed_numbers",
+              "displayName": "allowed_numbers",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Video ID",
+              "displayName": "Video ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1744,
+        80
+      ],
+      "id": "0de5479a-0004-4780-b172-c8d7f0265e4f",
+      "name": "Запись метрик Reels4",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XfzArO0xYCSILEFW",
+          "name": "n8n Pashkacurl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app6G4TaOjNZY0VwG",
+          "mode": "list",
+          "cachedResultName": "Контент-завод",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0oz8V62DPfTmer",
+          "mode": "list",
+          "cachedResultName": "YouTube",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG/tbl0oz8V62DPfTmer"
+        },
+        "filterByFormula": "=({Video ID} = '{{ $json.query['Video ID'] }}')",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        48,
+        96
+      ],
+      "id": "66f6f16c-c4a9-4aef-ac0c-3fe60ed055bb",
+      "name": "Search video2",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XfzArO0xYCSILEFW",
+          "name": "n8n Pashkacurl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app6G4TaOjNZY0VwG",
+          "mode": "list",
+          "cachedResultName": "Контент-завод",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUcxgedpPoGoT9h",
+          "mode": "list",
+          "cachedResultName": "Темы для статей",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG/tblUcxgedpPoGoT9h"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Тема": "={{ $json.title }}",
+            "Ссылка на видео": "={{ $('Search video2').item.json['Ссылка на видео'] }}",
+            "Video ID": "={{ $('Search video2').item.json['Video ID'] }}",
+            "Описание": "={{ $json.description }}",
+            "Приоритет": 11,
+            "Статус": "Новый",
+            "Транскрипция": "={{ $('Search video2').item.json['Транскрипция'] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Описание",
+              "displayName": "Описание",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ключевые слова",
+              "displayName": "Ключевые слова",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Статус",
+              "displayName": "Статус",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Новый",
+                  "value": "Новый"
+                },
+                {
+                  "name": "Написать",
+                  "value": "Написать"
+                },
+                {
+                  "name": "Опубликовано",
+                  "value": "Опубликовано"
+                },
+                {
+                  "name": "Отказ",
+                  "value": "Отказ"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Приоритет",
+              "displayName": "Приоритет",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "primary_keywords",
+              "displayName": "primary_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "secondary_keywords",
+              "displayName": "secondary_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "long_tail_keywords",
+              "displayName": "long_tail_keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Ссылка на видео",
+              "displayName": "Ссылка на видео",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Транскрипция",
+              "displayName": "Транскрипция",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Заголовок",
+              "displayName": "Заголовок",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Статья ДЗЕН",
+              "displayName": "Статья ДЗЕН",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Дискрипшен",
+              "displayName": "Дискрипшен",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Превью",
+              "displayName": "Превью",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Сценарий",
+              "displayName": "Сценарий",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Дата",
+              "displayName": "Дата",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Анализатор Reels",
+              "displayName": "Анализатор Reels",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Рекомендации",
+              "displayName": "Рекомендации",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Новая идея",
+              "displayName": "Новая идея",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Написать сценарий",
+              "displayName": "Написать сценарий",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Аватар",
+              "displayName": "Аватар",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Готовый аватар",
+              "displayName": "Готовый аватар",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Video ID",
+              "displayName": "Video ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        768,
+        96
+      ],
+      "id": "ddbaed13-7d0f-43be-8175-63755ca56649",
+      "name": "Запись метрик Reels5",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XfzArO0xYCSILEFW",
+          "name": "n8n Pashkacurl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "app6G4TaOjNZY0VwG",
+          "mode": "list",
+          "cachedResultName": "Контент-завод",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUcxgedpPoGoT9h",
+          "mode": "list",
+          "cachedResultName": "Темы для статей",
+          "cachedResultUrl": "https://airtable.com/app6G4TaOjNZY0VwG/tblUcxgedpPoGoT9h"
+        },
+        "id": "={{ $('Webhook').item.json.query.recordId }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1024,
+        80
+      ],
+      "id": "6020f40a-a476-41cf-b024-ee354becc9a0",
+      "name": "Search video3",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "XfzArO0xYCSILEFW",
+          "name": "n8n Pashkacurl"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=SYSTEM PROMPT — Agent #2a v2: SEO + GEO Semantic Core Generator + Evidence Draft\n\nYou are a senior SEO strategist and GEO (Generative Engine Optimization) editor.\nGEO is the top priority: help the article be retrievable and citable by AI assistants and generative search.\n\nYou do NOT write the full article.\nYou produce: SEO+GEO keywords, GEO blocks for AI-citability, evidence from transcript AND external research, and a draft snippet.\n\n--------------------------------------------------\n0) AUTHOR & AUDIENCE CONTEXT\n--------------------------------------------------\n\nAuthor: Pavel Leshchenko — builds AI content systems for entrepreneurs and experts.\nStarts with meaning extraction, then strategy, then transparent automation.\nNo client cases yet — live public case on himself.\n\nAudience: business owners, founders, experts (28-42).\nHave a product and clients. Content absent or chaotic.\nTried SMM / courses / ChatGPT — nothing stuck.\n\nKEYWORD TONE RULES:\n- NO hype words: 'взрывной,' 'секретный,' 'гарантированный,' 'уникальный,' 'революционный,' 'прорыв,' 'пассивный доход,' 'без усилий.'\n- NO sales promises: no 'лиды,' 'продажи,' 'заявки гарантированно,' 'доход,' 'заработок.'\n- Pavel promises VISIBILITY and SYSTEM — keywords should reflect this.\n- Prefer diagnostic/criteria/how-to phrasing.\n\nGEO BLOCK TONE:\n- Calm, practical Russian. No marketing language, no emotional pressure.\n- Position: practitioner who builds systems, not guru who teaches secrets.\n\nNO PROMOTIONAL INSERTS IN ANY OUTPUT:\nCTA, banners, Telegram links, 'напиши РАЗБОР', product mentions — inserted SEPARATELY. Do NOT include in any field.\n\n--------------------------------------------------\n1) INPUTS\n--------------------------------------------------\n\nTRANSCRIPT:\n{{ $('Search video3').first().json['Транскрипция'] }}\n\nTOPIC:\n{{ $('Search video3').first().json['Тема'] }}\n\nEDITORIAL_DESCRIPTION:\n{{ $('Search video3').first().json['Описание'] }}\n\nPERPLEXITY_RESEARCH (external facts with sources):\n{{ $('Message a model1').first().json.choices[0].message.content }}\n\nPERPLEXITY_CITATIONS (source URLs):\n{{ $('Message a model1').first().json.citations }}\n\nGROUNDING RULE:\nTOPIC + EDITORIAL_DESCRIPTION define the SCOPE.\nTRANSCRIPT is for evidence (quotes/facts from author).\nPERPLEXITY_RESEARCH is for external facts, numbers, comparisons, trends with real sources.\nUse BOTH sources. Prefer Perplexity for numbers and external proof. Prefer Transcript for author voice and experience.\n\n--------------------------------------------------\n2) SCOPE LOCK (CRITICAL — internal step, NOT in output)\n--------------------------------------------------\n\nBefore producing keywords, internally lock scope:\n- Core object (what the article is mainly about)\n- Core problem/tension (what goes wrong)\n- Allowed subtopics (3-7)\n- Out-of-scope clusters from transcript (do NOT let them leak into keywords)\n\n--------------------------------------------------\n3) KEYWORD RULES\n--------------------------------------------------\n\nALL KEYWORDS must sound like REAL SEARCH QUERIES that a person types into Yandex, Google, or asks an AI assistant.\n\nPRIMARY KEYWORD: exactly 1, specific, anchored to core object.\nBAD: 'система публикации контента для экспертов' (textbook label)\nGOOD: 'как автоматизировать публикацию контента на несколько площадок'\n\nSECONDARY KEYWORDS: 5-8, semantic expansions.\nInclude morphological variations for Yandex + English terms where natural (AI, SMM, SEO).\n\nLONG-TAIL KEYWORDS: 6-8, question/scenario-based.\nMust include:\n- 2 starting with 'почему ...'\n- 2 starting with 'как понять / что проверить ...'\n- 1 starting with 'когда имеет смысл / как выбрать ...'\n- 2 AI-QUERY FORMAT: conversational queries people ask AI assistants (Perplexity, ChatGPT, YandexGPT)\n\nGLOBAL:\n- No hype words, no sales promises\n- No borrowed brand names from transcript\n- Keywords = real search queries, not category labels\n\n--------------------------------------------------\n4) GEO RULES (TOP PRIORITY)\n--------------------------------------------------\n\ngeo_blocks — ONE FLAT STRING with ; between sections and | between items.\nNOT a JSON object. NOT nested.\n\nContents:\n- tldr: 3-5 short citation-ready statements (max 15 words each)\n- definitions: 2-3 (format: 'X — это Y которое делает Z')\n- checklist_questions: 3-5\n- criteria_points: 3-4\n- faq_questions: 3-5\n\nCITATION-READY: every element must be a self-contained statement an AI assistant can cite without surrounding context.\n\nBRAND ANCHORING:\n- At least 1 tldr line mentions author concept ('распаковка смыслов,' 'AI-контент-система,' 'система в собственности клиента')\n- At least 1 faq_question answerable with reference to author's approach\n\nDo NOT invent facts. Do NOT use competitor brand names.\n\n--------------------------------------------------\n5) EVIDENCE RULES (TWO SOURCES)\n--------------------------------------------------\n\nTRANSCRIPT EVIDENCE (author voice):\n- Extract mechanisms and principles, NOT competitor product names\n- Frame as generic concepts\nBAD: 'Система Титова состоит из шести схем'\nGOOD: 'Автоматизация может включать несколько связанных схем для разных типов контента'\n\nPERPLEXITY EVIDENCE (external proof):\n- Use facts, numbers, comparisons from PERPLEXITY_RESEARCH\n- Keep the source reference (e.g. 'по данным KT.Team 2025')\n- These are REAL external facts — use them to strengthen the article\n\nevidence_anchors: 5-8 anchors total, mixing BOTH sources.\nFormat: claim — source\nMark each anchor with [T] for transcript or [P] for Perplexity.\nExample: '[P] ИИ-агенты освобождают 30% времени менеджеров — KT.Team 2025 | [T] Одно видео превращается в 5 единиц контента — автор описывает свою систему'\n\n--------------------------------------------------\n6) PERPLEXITY FACTS (for article writer)\n--------------------------------------------------\n\nperplexity_facts: 3-5 key facts from PERPLEXITY_RESEARCH, formatted for direct use in article.\nEach fact: statement + source name + year.\nFormat: 'fact1 (Source, year) | fact2 (Source, year) | ...'\nOnly facts RELEVANT to the article scope. Skip irrelevant ones.\n\n--------------------------------------------------\n7) FAQ PAIRS (for Schema JSON-LD generation)\n--------------------------------------------------\n\nfaq_pairs: 3-4 question-answer pairs for FAQ Schema markup.\nCombine: Perplexity FAQ data + article topic + author approach.\nFormat: 'Q: question? A: short answer (max 30 words) | Q: question? A: answer | ...'\n\nEach answer must:\n- Contain a specific fact or number where possible\n- Be self-contained (readable without the article)\n- Naturally mention the approach where relevant (not forced)\n\n--------------------------------------------------\n8) DRAFT SNIPPET\n--------------------------------------------------\n\ndraft_snippet (500-800 chars):\n- Russian, strictly within scope\n- Built from BOTH evidence sources (transcript + Perplexity)\n- Must include at least 1 fact with source from Perplexity\n- Calm, practical tone\n- NO CTA, NO Telegram, NO product names, NO banners\n\n--------------------------------------------------\n9) OUTPUT FORMAT — JSON SAFETY IS CRITICAL\n--------------------------------------------------\n\nReturn exactly ONE valid JSON object. Nothing else.\n\nSTRICT RULES:\n1. START with { — no text, no markdown, no ```json before it\n2. END with } — no text after it\n3. Exactly 8 keys, all values are STRINGS\n4. INSIDE string values:\n   - NEVER use double-quote character\n   - Use single quotes or « » instead\n   - NEVER use real line breaks — replace with spaces\n   - NEVER use backslash or backticks\n5. Every value must be ONE LINE\n6. geo_blocks must be ONE FLAT STRING with ; and |\n\nCHARACTER LIMITS PER FIELD (strict):\n- primary_keywords: max 80 chars\n- secondary_keywords: max 300 chars\n- long_tail_keywords: max 500 chars\n- geo_blocks: max 800 chars\n- evidence_anchors: max 600 chars\n- perplexity_facts: max 400 chars\n- faq_pairs: max 500 chars\n- draft_snippet: max 800 chars\nTOTAL OUTPUT: under 4000 characters.\n\n{\n  \"primary_keywords\": \"...\",\n  \"secondary_keywords\": \"...\",\n  \"long_tail_keywords\": \"...\",\n  \"geo_blocks\": \"...\",\n  \"evidence_anchors\": \"...\",\n  \"perplexity_facts\": \"...\",\n  \"faq_pairs\": \"...\",\n  \"draft_snippet\": \"...\"\n}\n\nSELF-CHECK before responding:\n- Does output start with { and end with } ?\n- Are there any double-quotes inside string values? (must be NONE)\n- Any line breaks inside values? (must be NONE)\n- Is geo_blocks a flat string, not a JSON object?\n- Does evidence_anchors include BOTH [T] and [P] sources?\n- Does draft_snippet include at least 1 Perplexity fact?\n- Are faq_pairs formatted as Q: ... A: ... pairs?\n\nEND OF SYSTEM PROMPT",
+        "options": {
+          "systemMessage": "OUTPUT LANGUAGE: RUSSIAN ONLY"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1312,
+        80
+      ],
+      "id": "88e5f10c-58a3-4384-853d-47ca99ad62af",
+      "name": "SEO статей",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "content": "## Темы для статей",
+        "height": 272,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "68ae98d8-935a-46e9-8f20-fa40fc92b255",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "## SEO для статей",
+        "height": 272,
+        "width": 932
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        944,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "6dc405c3-a059-437f-86d7-84ca8d6efb18",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.output || $input.first().json.text || \"\";\n\nlet clean = raw.replace(/```json\\s*/gi, \"\").replace(/```\\s*/g, \"\").trim();\n\nconst start = clean.indexOf(\"{\");\nconst end = clean.lastIndexOf(\"}\");\n\nif (start === -1 || end === -1) {\n  throw new Error(\"No JSON found in agent output\");\n}\n\nclean = clean.substring(start, end + 1);\nclean = clean.replace(/[\\x00-\\x1F\\x7F]/g, \" \").replace(/  +/g, \" \");\n\nlet parsed;\ntry {\n  parsed = JSON.parse(clean);\n} catch (e) {\n  const keys = [\"primary_keywords\", \"secondary_keywords\", \"long_tail_keywords\", \"geo_blocks\", \"evidence_anchors\", \"perplexity_facts\", \"faq_pairs\", \"draft_snippet\"];\n  parsed = {};\n  \n  for (let i = 0; i < keys.length; i++) {\n    const key = keys[i];\n    const nextKey = keys[i + 1];\n    \n    let pattern;\n    if (nextKey) {\n      pattern = new RegExp(`\"${key}\"\\\\s*:\\\\s*\"([\\\\s\\\\S]*?)\"\\\\s*,\\\\s*\"${nextKey}\"`, \"i\");\n    } else {\n      pattern = new RegExp(`\"${key}\"\\\\s*:\\\\s*\"([\\\\s\\\\S]*?)\"\\\\s*}`, \"i\");\n    }\n    \n    const match = clean.match(pattern);\n    parsed[key] = match ? match[1].replace(/\"/g, \"«»\").trim() : \"\";\n  }\n}\n\nconst required = [\"primary_keywords\", \"secondary_keywords\", \"long_tail_keywords\", \"geo_blocks\", \"evidence_anchors\", \"perplexity_facts\", \"faq_pairs\", \"draft_snippet\"];\nfor (const key of required) {\n  if (!parsed[key]) parsed[key] = \"\";\n}\n\nreturn [{ json: parsed }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1584,
+        80
+      ],
+      "id": "5c3d5b76-a8e2-4212-b306-f2200b954cf1",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "model": "sonar-pro",
+        "messages": {
+          "message": [
+            {
+              "content": "=Исследуй тему: \"{{ $json['Тема'] }}\"\n\nКонтекст: статья для блога switchonai.ru. Автор строит AI-системы автоматизации контента для предпринимателей и экспертов в России. Нужны факты которые усилят экспертность статьи.\n\nФормат ответа (строго):\n\nФАКТЫ:\n1. [Утверждение с конкретной цифрой] — Источник: [Название издания/компании], [год]\n2. [Утверждение с конкретной цифрой] — Источник: [Название], [год]\n3. [Утверждение с конкретной цифрой] — Источник: [Название], [год]\n\nСРАВНЕНИЕ:\n| Критерий | [Конкретное название 1] | [Конкретное название 2] | [Конкретное название 3] |\n(конкретные инструменты, платформы или подходы — не Вариант А/Б/В)\n\nFAQ:\n1. [Вопрос]? — [Развёрнутый ответ 15-30 слов с цифрой или фактом, источник в скобках]\n2. [Вопрос]? — [Развёрнутый ответ 15-30 слов]\n3. [Вопрос]? — [Развёрнутый ответ 15-30 слов]\n4. [Вопрос]? — [Развёрнутый ответ 15-30 слов]\n\nТРЕНД:\n[2-3 предложения о текущем тренде 2025-2026 по теме, с источником]\n\nИсточники указывай ВНУТРИ текста, не ссылками [1][2]. На русском. Без вступлений и выводов."
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexity",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        80
+      ],
+      "id": "c9d175c4-2fd6-4908-913f-0ee4405c1ad2",
+      "name": "Message a model1",
+      "credentials": {
+        "perplexityApi": {
+          "id": "yaL02jXQ62k0noVl",
+          "name": "Perplexity SPRUT"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Structured Output Parser3": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent темы статей",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent темы статей": {
+      "main": [
+        [
+          {
+            "node": "Деление массива2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Деление массива2": {
+      "main": [
+        [
+          {
+            "node": "Запись метрик Reels5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search video2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent темы статей",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search video3": {
+      "main": [
+        [
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEO статей": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Запись метрик Reels4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "SEO статей",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ced9628f-dd93-4b66-a2b7-0af35fb4adba",
+  "meta": {
+    "instanceId": "fc24ffd190a20cfac5643160ea4627f089674d406c5b66f8974e225bf9034edc"
+  },
+  "id": "ZUgG90AmXtg1pE7H",
+  "tags": []
+}

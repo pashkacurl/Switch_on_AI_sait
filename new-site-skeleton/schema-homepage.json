@@ -1,0 +1,132 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://switchonai.ru/#person",
+      "name": "Павел Лещенко",
+      "givenName": "Павел",
+      "familyName": "Лещенко",
+      "jobTitle": "AI-автоматизатор, эксперт по автоматизации бизнеса",
+      "description": "Внедряю AI-системы под ключ для бизнеса и экспертов. Специализация: автоматизация контента, продаж и операционных процессов. Принцип: сначала система, потом автоматизация.",
+      "url": "https://switchonai.ru/",
+      "email": "SwitchOnAI@yandex.ru",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://switchonai.ru/wp-content/uploads/pavel-leshenko.jpg",
+        "width": 400,
+        "height": 400
+      },
+      "sameAs": [
+        "https://t.me/Leshenko"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      },
+      "knowsAbout": [
+        "AI-автоматизация бизнеса",
+        "ChatGPT",
+        "Claude AI",
+        "Автоматизация контент-маркетинга",
+        "Цифровые сотрудники",
+        "Make.com",
+        "n8n",
+        "Telegram-боты",
+        "YouTube продвижение",
+        "Pinterest маркетинг"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "AI-автоматизатор",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Санкт-Петербург"
+        }
+      }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://switchonai.ru/#service",
+      "name": "Включи ИИ — AI-автоматизация для бизнеса",
+      "alternateName": "SwitchOnAI",
+      "description": "Внедрение AI-систем под ключ для бизнеса и экспертов: автоматизация контента, продаж и операционных процессов. Без зависимости от подрядчика — вы владеете системой.",
+      "url": "https://switchonai.ru/",
+      "provider": {
+        "@id": "https://switchonai.ru/#person"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Россия"
+      },
+      "serviceType": "AI-автоматизация бизнеса",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги AI-автоматизации",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Внедрение AI-автоматизации под ключ",
+              "description": "Полный цикл: аудит бизнеса → стратегия → внедрение AI-системы → передача управления клиенту"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Автоматизация контент-маркетинга",
+              "description": "Система автоматического создания, публикации и дистрибуции контента на всех площадках"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Команда за 1 вечер",
+              "description": "Сборка персональной команды AI-ассистентов: маркетолог, продюсер, SMM, аналитик",
+              "url": "https://switchonai.ru/ai-komanda/"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Бесплатный аудит",
+              "description": "Аудит текущей ситуации и план внедрения AI-автоматизации"
+            },
+            "price": "0",
+            "priceCurrency": "RUB"
+          }
+        ]
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "Russian",
+        "url": "https://t.me/Leshenko"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://switchonai.ru/#website",
+      "name": "Включи ИИ",
+      "url": "https://switchonai.ru/",
+      "description": "Экосистема AI-автоматизации для бизнеса и экспертов",
+      "publisher": {
+        "@id": "https://switchonai.ru/#person"
+      },
+      "inLanguage": "ru-RU",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://switchonai.ru/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}

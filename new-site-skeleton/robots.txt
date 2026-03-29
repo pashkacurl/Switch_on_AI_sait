@@ -1,0 +1,92 @@
+# switchonai.ru — robots.txt
+# Последнее обновление: 2026-03-29
+
+# =============================================
+# AI-КРОУЛЕРЫ — явно разрешены
+# =============================================
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+# =============================================
+# ЯНДЕКС
+# =============================================
+
+User-agent: Yandex
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /cgi-bin/
+Disallow: /search/
+Disallow: /author/
+Disallow: /feed/
+Disallow: /page/
+Disallow: /*?s=
+Disallow: /*&s=
+Disallow: /*?p=
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
+
+# =============================================
+# GOOGLE
+# =============================================
+
+User-agent: Googlebot
+Allow: /wp-content/uploads/
+Allow: /*.js$
+Allow: /*.css$
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /cgi-bin/
+Disallow: /search/
+Disallow: /author/
+Disallow: /feed/
+Disallow: /page/
+Disallow: /*?s=
+Disallow: /*&s=
+Disallow: /*?p=
+Disallow: /wp-includes/
+Disallow: /trackback/
+Disallow: */embed/
+Disallow: */wlwmanifest.xml
+
+# =============================================
+# ВСЕ ОСТАЛЬНЫЕ БОТЫ
+# =============================================
+
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /cgi-bin/
+Disallow: /search/
+Disallow: /author/
+Disallow: /feed/
+Disallow: /page/
+Disallow: /*?s=
+Disallow: /*&s=
+Disallow: /*?p=
+
+# =============================================
+# SITEMAP
+# =============================================
+
+Sitemap: https://switchonai.ru/sitemap_index.xml
+Llms-txt: https://switchonai.ru/llms.txt
