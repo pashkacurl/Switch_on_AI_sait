@@ -12,6 +12,9 @@
   - `docs/research/competitor-analysis.md`
   - `docs/research/repo-audit.md`
   - `docs/strategy/site-funnel-strategy.md`
+  - `docs/content/site-content-architecture.md`
+  - `docs/design/site-visual-direction.md`
+  - `docs/engineering/site-implementation-handoff.md`
   - `iSite/`
   - `ВКЛЮЧИ ИИ/`
 
@@ -943,6 +946,24 @@ SEO, GEO, доверие, органический вход, прогрев.
 Если есть конфликт между старым слоем и новым, **источник истины = `docs/` + этот master document**.
 
 ---
+
+## 20.1 Companion docs for Viktor
+
+Помимо этого master-документа, у Виктора теперь есть четыре специализированных handoff-документа:
+
+- `docs/research/competitor-analysis.md` — конкурентный анализ, фокус на Титове / Автограф и рыночных бенчмарках
+- `docs/research/repo-audit.md` — аудит репозитория: что канонично, что legacy, что брать в production
+- `docs/strategy/site-funnel-strategy.md` — стратегия сайта: два сегмента, две воронки, страница-прокладка, CTA-логика
+- `docs/content/site-content-architecture.md` — production-ready архитектура контента и блоков всех V1-страниц
+- `docs/design/site-visual-direction.md` — визуальное направление и дизайн-система
+- `docs/engineering/site-implementation-handoff.md` — технический handoff по сборке v1 на WordPress / Elementor
+
+Логика работы для Виктора:
+1. `MASTER-SITE-SPEC.md` — master overview
+2. `site-funnel-strategy.md` — понять маршруты и CTA
+3. `site-content-architecture.md` — собрать страницы по блокам
+4. `site-visual-direction.md` — оформить визуально
+5. `site-implementation-handoff.md` — реализовать в WordPress
 
 ## 21. Краткий вывод
 
