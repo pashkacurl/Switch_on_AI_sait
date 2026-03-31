@@ -1,55 +1,92 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Project Overview
 
-Website for **"ВКЛЮЧИ ИИ" (Switch On AI)** — an AI education and consulting ecosystem by Pavel Leshchenko, targeting Russian entrepreneurs/experts who want to adopt AI tools. Domain: switchonai.ru.
+Website for **"ВКЛЮЧИ ИИ" (Switch On AI)** — AI-контент-системы для предпринимателей и экспертов.
+Автор: Павел Лещенко (@Leshenko). Домен: `switchonai.ru`.
 
-## Architecture
+## Current State (March 2026)
 
-The project has three distinct layers:
+### Production Site
+- **URL:** https://switchonai.ru
+- **CMS:** WordPress 6.9.4 on VPS
+- **Active theme on prod:** `webmastercpit` (custom, fully coded, no page builders)
+- **Blog:** 170+ posts at `/stati/`, single category "Рубрика"
+- **SEO:** Yoast SEO v26.9
+- **Content pipeline:** n8n → Airtable → WordPress REST API
+- **Issues:** missing security headers, xmlrpc.php open, robots.txt blocks pages with "page"
 
-1. **`index.html`** — Single-file static prototype that served as the design blueprint. Contains all HTML, CSS, and JS inline. This is the reference design, not the production site.
+### Design Direction (approved March 2026)
+- **Light-first**, not dark-tech
+- Palette: `#F5F6FA` bg, `#4BD392` green CTA, `#2F80ED` blue accents
+- Fonts: Manrope (headings), Inter (body), Space Grotesk (eyebrow), JetBrains Mono (code)
+- Visual direction doc: `docs/design/site-visual-direction.md`
 
-2. **`wordpress-theme/`** — Custom WordPress theme (production target), a 1:1 translation of `index.html` into WordPress. No page builders (Elementor, etc.), no CSS preprocessors, no JS frameworks — pure vanilla stack.
+### WordPress Theme in Repo
+- `wordpress-theme/` — custom classic theme (January dark version, needs rebuild to match new design)
+- Vanilla CSS + vanilla JS, no build tools, no Composer
+- Blog templates exist but need verification against prod
 
-3. **`Действующий сайт/`** — CSS backup of the currently live site (legacy). This is a separate, older design with different structure (dark navy `#1C1F33` palette, custom `.otf` fonts, 1024px fixed width). Contains a full blog system CSS starting at line ~4913.
+## Repository Structure
 
-### WordPress Theme Structure
+```
+.
+├── frontend/            # Current HTML prototype (light design, 9 blocks)
+│   └── index.html       # ← Active main page prototype
+│
+├── wordpress-theme/     # WP theme (needs update to match new design)
+│
+├── docs/                # Active documentation (source of truth)
+│   ├── START-HERE.md    # Entry point
+│   ├── content/         # Content architecture
+│   ├── design/          # Visual direction, design system
+│   ├── engineering/     # Implementation handoff
+│   ├── research/        # Competitor analysis, repo audit
+│   ├── seo/             # SEO audit, action plans
+│   ├── strategy/        # Funnel strategy
+│   └── wordpress/       # WP audit, architecture, deployment
+│
+├── n8n/                 # n8n workflows for content automation
+│   ├── workflows/       # JSON workflow files
+│   └── README.md        # Status of 12 enhancements
+│
+├── iSite/               # Brand library (strategy, branding, media)
+│   ├── 03_Брендинг/     # Brandbook PDF
+│   └── 05_Медиа/        # Portraits, logos, backgrounds, covers
+│
+├── ВКЛЮЧИ ИИ/           # Marketing knowledge base (positioning, content, skills)
+│
+├── _archive/            # Legacy artifacts (January dark prototype, old docs)
+│
+└── README.md
+```
 
-- **`functions.php`** — Theme setup, script enqueuing (Google Fonts, `style.css`, `main.js`), WordPress Customizer API (hero text, contact info, social URLs), 3 footer widget areas
-- **`front-page.php`** — Homepage: hero section + 8 `get_template_part()` calls to `template-parts/section-*.php`
-- **`header.php`** / **`footer.php`** — Site chrome with `wp_nav_menu()` fallbacks and Customizer-driven contact/social data
-- **`template-parts/`** — Self-contained sections: problems, services, process, cases, training, testimonials, faq, cta
-- **`assets/js/main.js`** — Vanilla JS IIFE: header scroll effect, FAQ accordion, scroll-reveal (`.reveal` → `.active`), smooth scroll, parallax on mouse, mobile menu toggle
-- **`style.css`** — All theme CSS + WordPress metadata header. Uses CSS custom properties (`:root` variables). Design: black bg `#000000`, blue accent `#69ace4`, Space Grotesk + Inter fonts, CSS-only 3D effects (rings, orb, dots)
+## Key Documents
 
-### Key Design Pattern
-
-Scroll animations use `.reveal` CSS class on elements. `main.js` uses IntersectionObserver-like logic to add `.active` class when elements enter viewport, triggering CSS transitions.
+| What | Where |
+|------|-------|
+| Entry point | `docs/START-HERE.md` |
+| Content blocks (9 sections) | `docs/content/site-content-architecture.md` |
+| Visual direction | `docs/design/site-visual-direction.md` |
+| Design principles | `docs/05-design-principles.md` |
+| Funnel strategy | `docs/strategy/site-funnel-strategy.md` |
+| WordPress audit | `docs/wordpress/WORDPRESS-AUDIT.md` |
+| Technical plan | `docs/06-technical-implementation-plan.md` |
+| SEO audit | `docs/seo/FULL-AUDIT-REPORT.md` |
+| Positioning & offer | `ВКЛЮЧИ ИИ/Маркетинг/ОФФЕР v6.0.md` |
+| Founder persona | `ВКЛЮЧИ ИИ/Я/Моя распаковка (про бизнес).md` |
 
 ## Development Workflow
 
-No build tools, no npm/yarn, no Composer. Development is manual:
-
+No build tools. Manual workflow:
 1. Edit theme files locally
-2. Upload to WordPress server (FTP or ZIP upload via WP Admin > Themes)
+2. Upload to WordPress server (FTP / ZIP via WP Admin)
 3. Activate theme, test in browser
 
-To package the theme: create a ZIP of the `wordpress-theme/` folder.
+## What Needs to Happen Next
 
-## Content & Brand Context
-
-- **Language:** All content is in Russian
-- **Brand:** ВКЛЮЧИ ИИ / Switch On AI
-- **iSite/** contains brand strategy docs (personality, business model, branding guidelines)
-- **Документация/** contains technical research (competitor analysis, animation tech research, WP implementation notes)
-- Customizer settings drive hero text, phone, email, Telegram, social URLs — avoid hardcoding these values
-
-## Important Notes
-
-- The WordPress theme CSS palette (black/blue/cream from Avtograf Group inspiration) differs from the legacy live site palette (dark navy `#1C1F33` / green `#4cd1a0`)
-- `Действующий сайт/main-style.css` is ~5800 lines and includes styles for a WordPress blog system (slider, post cards, sidebar, single article, breadcrumbs, pagination) starting around line 4913
-- The live site uses custom `.otf` font families (Bold, Medium, Regular, Light) referenced via relative `fonts/` path
-- A minimal `.gitignore` exists for IDE/OS noise; binary source files still live in `iSite/05_Медиа/`, so be deliberate with large commits
+1. Get VPS/WP admin access to verify prod state
+2. Rebuild `wordpress-theme/` to match `frontend/index.html` (light design)
+3. Complete blog template coverage
+4. Deploy updated theme to prod
+5. Configure security headers, fix robots.txt

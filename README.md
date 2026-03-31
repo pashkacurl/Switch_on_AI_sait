@@ -1,29 +1,35 @@
-# Switch On AI
+# Switch On AI / ВКЛЮЧИ ИИ
 
-Корневая точка входа в проект сайта `Switch On AI / ВКЛЮЧИ ИИ`.
+AI-контент-системы для предпринимателей и экспертов.
+Сайт: https://switchonai.ru
 
-## Start Here
+## Quick Start
 
-- Главный вход в актуальную документацию: `docs/START-HERE.md`
-- Карта документации: `docs/INDEX.md`
-- Текущий статус исполнения: `docs/14-execution-status.md`
+- Документация: [`docs/START-HERE.md`](docs/START-HERE.md)
+- Карта документов: [`docs/INDEX.md`](docs/INDEX.md)
+- Статус: [`docs/14-execution-status.md`](docs/14-execution-status.md)
 
-## Main Working Areas
+## Structure
 
-- `wordpress-theme/` — фактическая кастомная WordPress-тема
-- `style-previews/` — визуальные направления и preview artifacts
-- `docs/` — актуальный operating docs-layer и source of truth
-- `iSite/` — структурированная библиотека брендовых, бизнес- и media-материалов
-- `ВКЛЮЧИ ИИ/` — продуктовый, маркетинговый и контентный knowledge base
+| Папка | Назначение |
+|-------|-----------|
+| `frontend/` | HTML-прототип главной (актуальный, светлый дизайн) |
+| `wordpress-theme/` | Кастомная WP-тема (требует обновления под новый дизайн) |
+| `docs/` | Вся актуальная документация (source of truth) |
+| `n8n/` | Воркфлоу автоматизации контента |
+| `iSite/` | Бренд-библиотека: стратегия, брендбук, медиа |
+| `ВКЛЮЧИ ИИ/` | Маркетинговый knowledge base |
+| `_archive/` | Архив: январский прототип, старые доки, style-previews |
 
-## Legacy / Reference
+## Tech Stack
 
-- `index.html` — legacy static prototype
-- `Документация/` — старый planning layer, reference-only
-- `Действующий сайт/` — legacy CSS backup live-site слоя
+- WordPress 6.9.4 on VPS
+- Custom classic theme (vanilla CSS/JS)
+- n8n → Airtable → WP REST API (content pipeline)
+- Yoast SEO
 
-## Repository Hygiene
+## Design Direction
 
-- Корень репозитория должен оставаться легким и навигационным.
-- Новая работа по стратегии и исполнению живет в `docs/` и `wordpress-theme/`.
-- Брендовые PDF, медиа и исходные материалы хранятся в `iSite/`, а не россыпью в корне.
+Light-first, conversion-focused, trust-building.
+Palette: `#F5F6FA` / `#4BD392` / `#2F80ED`.
+Fonts: Manrope + Inter.
