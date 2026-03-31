@@ -1,0 +1,173 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://switchonai.ru/#organization",
+    "name": "ВКЛЮЧИ ИИ",
+    "alternateName": "Switch On AI",
+    "url": "https://switchonai.ru",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://switchonai.ru/wp-content/uploads/logo.png",
+      "width": 300,
+      "height": 60
+    },
+    "description": "AI-контент-системы для предпринимателей и экспертов. Стратегия, автоматизация и публикация контента с помощью искусственного интеллекта.",
+    "founder": {
+      "@id": "https://switchonai.ru/#person"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Санкт-Петербург",
+      "addressCountry": "RU"
+    },
+    "sameAs": [
+      "https://t.me/Switch_On_AI",
+      "https://t.me/Leshenko"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "url": "https://t.me/Switch_On_AI",
+      "availableLanguage": "Russian"
+    },
+    "inLanguage": "ru"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://switchonai.ru/#person",
+    "name": "Павел Лещенко",
+    "alternateName": "Pavel Leshchenko",
+    "jobTitle": "Основатель",
+    "description": "Основатель проекта «ВКЛЮЧИ ИИ». Эксперт по внедрению AI-контент-систем для предпринимателей и экспертов.",
+    "url": "https://t.me/Leshenko",
+    "worksFor": {
+      "@id": "https://switchonai.ru/#organization"
+    },
+    "sameAs": [
+      "https://t.me/Leshenko"
+    ],
+    "knowsAbout": [
+      "Искусственный интеллект",
+      "Контент-маркетинг",
+      "Автоматизация контента",
+      "AI-контент-системы"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://switchonai.ru/#website",
+    "name": "ВКЛЮЧИ ИИ",
+    "alternateName": "Switch On AI",
+    "url": "https://switchonai.ru",
+    "description": "AI-контент-системы для предпринимателей и экспертов",
+    "publisher": {
+      "@id": "https://switchonai.ru/#organization"
+    },
+    "inLanguage": "ru",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://switchonai.ru/?s={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://switchonai.ru/#service",
+    "name": "Внедрение AI-контент-системы",
+    "description": "Полное внедрение AI-контент-системы за 4 недели: стратегия, настройка автоматизации, запуск публикации контента с помощью искусственного интеллекта.",
+    "provider": {
+      "@id": "https://switchonai.ru/#organization"
+    },
+    "serviceType": "AI-автоматизация контента",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Россия"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://switchonai.ru/price/",
+      "serviceType": "Онлайн"
+    },
+    "offers": {
+      "@type": "Offer",
+      "name": "Экскурсия — бесплатная консультация",
+      "description": "30-минутная демонстрация AI-контент-системы в действии.",
+      "url": "https://switchonai.ru/price/",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "RUB"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Это подойдёт для моей ниши?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Система подходит для любой экспертности или бизнеса, где есть что сказать аудитории. Мы адаптируем стратегию, площадки и форматы под вашу нишу. На Экскурсии разберём, как это будет выглядеть конкретно для вас."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Нужны ли технические знания?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Нет. Мы собираем систему за вас и обучаем ей пользоваться. Если умеете работать с таблицей и мессенджером — справитесь."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Сколько времени займёт запуск?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "В среднем 4 недели от старта до работающей системы. На вашей стороне — 2–3 часа на распаковку и обратную связь по стратегии."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Чем это отличается от SMM-агентства?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Агентство — это подрядчик. Мы строим систему, которая остаётся у вас. После запуска вы не платите за ведение — только за инфраструктуру. И контент звучит как вы, а не как копирайтер."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Есть ли кейсы?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Первая система строится публично — на себе. Мы открыто показываем механику, результаты и ошибки. На Экскурсии покажем всё изнутри."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Что такое Экскурсия?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "30–40 минут, где Павел покажет систему изнутри, разберёт вашу ситуацию и ответит на вопросы. Без обязательств и без продажи в лоб."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Главная",
+        "item": "https://switchonai.ru/"
+      }
+    ]
+  }
+]
