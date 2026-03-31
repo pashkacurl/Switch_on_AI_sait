@@ -3079,7 +3079,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const content = $input.first().json.final_content;\nconst baseUrl = 'https://switchonai.ru';\n\nconst placeholders = [...content.matchAll(/\\[INTERNAL_LINK: topic=\"([^\"]+)\" anchor=\"([^\"]+)\"\\]/g)];\n\nlet resolved = content;\n\nfor (const match of placeholders) {\n  const [full, topic, anchor] = match;\n  resolved = resolved.replace(full, `<a href=\"${baseUrl}/?s=${encodeURIComponent(topic)}\">${anchor}</a>`);\n}\n\nreturn [{ json: { ...($input.first().json), final_content: resolved } }];"
+        "jsCode": "const content = $input.first().json.final_content;\nconst baseUrl = 'https://switchonai.ru';\n\nconst placeholders = [...content.matchAll(/\\[INTERNAL_LINK: topic=\"([^\"]+)\" anchor=\"([^\"]+)\"\\]/g)];\n\nlet resolved = content;\n\nfor (const match of placeholders) {\n  const [full, topic, anchor] = match;\n  resolved = resolved.replace(full, `<a href=\"${baseUrl}/?s=${encodeURIComponent(topic)}\">${anchor}</a>`);\n}\n\nreturn [{ json: { ...($input.first().json), final_content: resolved }, binary: $input.first().binary }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
