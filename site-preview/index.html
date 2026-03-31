@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВКЛЮЧИ ИИ — AI-контент-системы для предпринимателей</title>
+<meta name="description" content="Павел Лещенко строит AI-контент-системы для предпринимателей и экспертов — чтобы нужные люди находили вас регулярно, без ежедневного погружения в контент.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   DESIGN SYSTEM TOKENS
+   ============================================ */
+:root {
+  --bg-page: #F5F6FA;
+  --bg-surface: #FFFFFF;
+  --bg-soft: #EEF2F7;
+  --bg-dark: #1C1F33;
+  --bg-dark-2: #162A40;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-secondary: #A0AEC0;
+  --accent-green: #4BD392;
+  --accent-green-dark: #3BB87D;
+  --accent-blue: #2F80ED;
+  --accent-mint-soft: #DDF8EC;
+  --accent-blue-soft: #E8F1FF;
+  --accent-amber-soft: #FFF2CC;
+  --border-soft: #E5E7EB;
+  --border-strong: #D1D5DB;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.08);
+  --radius-card: 20px;
+  --radius-btn: 16px;
+  --container: 1200px;
+  --container-narrow: 800px;
+  --section-py: 112px;
+  --section-py-mobile: 64px;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container--narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.1; }
+h1 { font-size: clamp(36px, 5vw, 60px); letter-spacing: -0.02em; }
+h2 { font-size: clamp(30px, 4vw, 44px); letter-spacing: -0.01em; }
+h3 { font-size: clamp(22px, 2.5vw, 30px); }
+h4 { font-size: clamp(18px, 2vw, 22px); }
+.eyebrow {
+  font-family: var(--font-accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue);
+}
+.lead { font-size: 20px; line-height: 1.6; color: var(--text-secondary); }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 16px 28px;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn--primary {
+  background: var(--accent-green);
+  color: #102018;
+  box-shadow: 0 2px 8px rgba(75, 211, 146, 0.3);
+}
+.btn--primary:hover {
+  background: var(--accent-green-dark);
+  box-shadow: 0 4px 16px rgba(75, 211, 146, 0.4);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.btn--secondary {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+.btn--secondary:hover {
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+.btn--on-dark {
+  background: var(--accent-green);
+  color: #102018;
+}
+.btn--ghost-dark {
+  background: transparent;
+  color: var(--text-on-dark);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn--ghost-dark:hover {
+  background: rgba(255,255,255,0.08);
+  text-decoration: none;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+.card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.card__icon--mint { background: var(--accent-mint-soft); }
+.card__icon--blue { background: var(--accent-blue-soft); }
+.card__icon--amber { background: var(--accent-amber-soft); }
+.card h4 { margin-bottom: 8px; }
+.card p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+.section {
+  padding: var(--section-py) 0;
+}
+.section--white { background: var(--bg-surface); }
+.section--soft { background: var(--bg-soft); }
+.section--dark {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+.section--dark .lead { color: var(--text-on-dark-secondary); }
+.section__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+.section__header p {
+  margin-top: 16px;
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+.section--dark .section__header p { color: var(--text-on-dark-secondary); }
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 0;
+  background: rgba(245, 246, 250, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--border-soft);
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.header__logo span { color: var(--accent-green); }
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.header__nav a {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.header__nav a:hover { color: var(--text-primary); text-decoration: none; }
+.header__cta {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+.header__burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.header__burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  padding: 140px 0 var(--section-py);
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
+  color: var(--text-on-dark);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(75,211,146,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(47,128,237,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero__content { max-width: 560px; }
+.hero__eyebrow {
+  font-family: var(--font-accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-green);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  margin-bottom: 20px;
+  line-height: 1.08;
+}
+.hero .lead {
+  color: var(--text-on-dark-secondary);
+  margin-bottom: 32px;
+  font-size: 18px;
+}
+.hero__ctas {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.hero__markers {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.hero__marker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-on-dark-secondary);
+}
+.hero__marker-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  flex-shrink: 0;
+}
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero__portrait {
+  width: 380px;
+  height: 460px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(75,211,146,0.15), rgba(47,128,237,0.15));
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero__portrait-placeholder {
+  text-align: center;
+  color: var(--text-on-dark-secondary);
+  font-size: 14px;
+}
+.hero__portrait-placeholder .icon { font-size: 48px; margin-bottom: 12px; display: block; }
+
+/* ============================================
+   GRID LAYOUTS
+   ============================================ */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.grid-2-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+/* ============================================
+   FOR WHOM (H2)
+   ============================================ */
+.situation-card {
+  padding: 24px;
+  border-left: 3px solid var(--accent-blue);
+  background: var(--bg-surface);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+}
+.situation-card .num {
+  font-family: var(--font-accent);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin-bottom: 8px;
+}
+.situation-card p { font-size: 16px; color: var(--text-primary); }
+.micro-note {
+  margin-top: 32px;
+  padding: 16px 20px;
+  background: var(--accent-amber-soft);
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* ============================================
+   PROBLEM (H3) — Two columns
+   ============================================ */
+.problem-col {
+  padding: 32px;
+  border-radius: var(--radius-card);
+}
+.problem-col--chaos {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+}
+.problem-col--system {
+  background: var(--accent-mint-soft);
+  border: 1px solid #86EFAC;
+}
+.problem-col h4 { margin-bottom: 16px; }
+.problem-col ul {
+  list-style: none;
+  padding: 0;
+}
+.problem-col li {
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.problem-col li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.problem-col--chaos li::before { background: #EF4444; }
+.problem-col--system li::before { background: var(--accent-green); }
+.blockquote {
+  margin-top: 40px;
+  padding: 24px 32px;
+  background: var(--bg-surface);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 0 16px 16px 0;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+.blockquote cite {
+  display: block;
+  margin-top: 12px;
+  font-style: normal;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   PROCESS STEPS (H4)
+   ============================================ */
+.step-card {
+  text-align: center;
+  padding: 32px 24px;
+}
+.step-num {
+  font-family: var(--font-accent);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.step-card h4 { margin-bottom: 8px; }
+.step-card p { font-size: 14px; color: var(--text-secondary); }
+.step-timeline {
+  text-align: center;
+  margin-top: 40px;
+  padding: 16px 24px;
+  background: var(--accent-blue-soft);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-blue);
+}
+
+/* ============================================
+   DELIVERABLES (H5)
+   ============================================ */
+.deliverable-card .card__icon { font-size: 24px; }
+
+/* ============================================
+   PROOF (H6)
+   ============================================ */
+.proof-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+.proof-card {
+  padding: 24px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-card);
+}
+.proof-card h4 { color: var(--text-on-dark); margin-bottom: 8px; font-size: 18px; }
+.proof-card p { color: var(--text-on-dark-secondary); font-size: 14px; }
+.artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.artifact {
+  aspect-ratio: 16/10;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-on-dark-secondary);
+  text-align: center;
+  padding: 12px;
+}
+
+/* ============================================
+   FIT / NOT FIT (H7)
+   ============================================ */
+.fit-col h4 { margin-bottom: 16px; }
+.fit-col ul { list-style: none; padding: 0; }
+.fit-col li {
+  padding: 10px 0;
+  padding-left: 28px;
+  position: relative;
+  font-size: 15px;
+}
+.fit-col li::before {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-size: 16px;
+}
+.fit-col--yes li::before { content: '✓'; color: var(--accent-green); font-weight: 700; }
+.fit-col--no li::before { content: '✗'; color: #EF4444; font-weight: 700; }
+
+/* ============================================
+   TWO PATHS (routing cards)
+   ============================================ */
+.route-card {
+  padding: 40px 32px;
+  text-align: center;
+  border: 2px solid var(--border-soft);
+  transition: border-color 0.3s;
+}
+.route-card:hover { border-color: var(--accent-green); }
+.route-card__icon { font-size: 40px; margin-bottom: 16px; }
+.route-card h3 { margin-bottom: 12px; }
+.route-card p { color: var(--text-secondary); margin-bottom: 24px; font-size: 15px; }
+
+/* ============================================
+   FAQ
+   ============================================ */
+.faq-item {
+  border-bottom: 1px solid var(--border-soft);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq-question::after {
+  content: '+';
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.faq-item.active .faq-question::after {
+  transform: rotate(45deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.faq-answer__inner {
+  padding-bottom: 20px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   FINAL CTA
+   ============================================ */
+.final-cta {
+  text-align: center;
+  padding: 96px 0;
+}
+.final-cta h2 { margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
+.final-cta .lead { margin-bottom: 12px; }
+.final-cta__list {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+.final-cta__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-on-dark-secondary);
+  font-size: 15px;
+}
+.final-cta__item .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-green);
+  border-radius: 50%;
+}
+.final-cta__btns {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--bg-dark);
+  color: var(--text-on-dark-secondary);
+  padding: 64px 0 32px;
+}
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer__brand p { font-size: 14px; margin-top: 12px; line-height: 1.7; }
+.footer__col h4 {
+  color: var(--text-on-dark);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.footer__col a {
+  display: block;
+  color: var(--text-on-dark-secondary);
+  font-size: 14px;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+.footer__col a:hover { color: var(--text-on-dark); text-decoration: none; }
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .hero__inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero__visual { order: -1; }
+  .hero__portrait { width: 280px; height: 340px; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .proof-cards { grid-template-columns: 1fr; }
+  .artifact-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer__inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  :root {
+    --section-py: 64px;
+  }
+  .header__nav { display: none; }
+  .header__burger { display: block; }
+  .hero { padding: 120px 0 64px; }
+  .hero__content { max-width: 100%; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2-cols { grid-template-columns: 1fr; gap: 24px; }
+  .hero__markers { flex-direction: column; gap: 12px; }
+  .hero__ctas { flex-direction: column; }
+  .hero__ctas .btn { width: 100%; justify-content: center; }
+  .footer__inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer__bottom { flex-direction: column; gap: 8px; }
+  .final-cta__list { flex-direction: column; align-items: center; }
+}
+
+/* ============================================
+   REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="header" id="header">
+  <div class="container">
+    <div class="header__inner">
+      <a href="#" class="header__logo">ВКЛЮЧИ <span>ИИ</span></a>
+      <nav class="header__nav">
+        <a href="#system">Система</a>
+        <a href="#process">Как это работает</a>
+        <a href="#proof">Кейсы</a>
+        <a href="#club">Клуб</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">О Павле</a>
+        <a href="#contact" class="btn btn--primary header__cta">Экскурсия</a>
+      </nav>
+      <button class="header__burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ====== H1: HERO ====== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__eyebrow">AI-контент-система</div>
+        <h1>Система вместо хаоса в&nbsp;контенте</h1>
+        <p class="lead">Строю AI-контент-системы для предпринимателей и&nbsp;экспертов&nbsp;— чтобы нужные люди находили вас регулярно, без ежедневного погружения в&nbsp;контент-операционку.</p>
+        <div class="hero__ctas">
+          <a href="#contact" class="btn btn--on-dark">Записаться на экскурсию</a>
+          <a href="#process" class="btn btn--ghost-dark">Как устроена система →</a>
+        </div>
+        <div class="hero__markers">
+          <div class="hero__marker"><span class="hero__marker-dot"></span> Распаковка смыслов</div>
+          <div class="hero__marker"><span class="hero__marker-dot"></span> Стратегия и контент-логика</div>
+          <div class="hero__marker"><span class="hero__marker-dot"></span> Система публикации и управления</div>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__portrait">
+          <div class="hero__portrait-placeholder">
+            <span class="icon">👤</span>
+            Портрет Павла<br><small>iSite/05_Медиа/Портреты/</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H2: ДЛЯ КОГО ====== -->
+<section class="section section--white" id="audience">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow">Для кого это</span>
+      <h2>У вас есть продукт, а&nbsp;системы контента&nbsp;— нет</h2>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="situation-card">
+        <div class="num">01</div>
+        <p>Контент выходит хаотично или не выходит вообще. Знаете, что надо&nbsp;— но&nbsp;системы нет.</p>
+      </div>
+      <div class="situation-card">
+        <div class="num">02</div>
+        <p>Уже пробовали SMM, ChatGPT, курсы&nbsp;— ничего не сложилось в&nbsp;работающую систему.</p>
+      </div>
+      <div class="situation-card">
+        <div class="num">03</div>
+        <p>Клиенты есть, но&nbsp;онлайн-присутствие слабое. Конкурент хуже&nbsp;— но&nbsp;его видно, а&nbsp;вас нет.</p>
+      </div>
+      <div class="situation-card">
+        <div class="num">04</div>
+        <p>Не хочется раздувать команду и&nbsp;жить в&nbsp;контенте каждый день. Хочется систему.</p>
+      </div>
+    </div>
+    <div class="micro-note reveal">
+      Если нужен только дешёвый поток постов&nbsp;— это не&nbsp;сюда.
+    </div>
+  </div>
+</section>
+
+<!-- ====== H3: ПРОБЛЕМА ====== -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow">В чём реальная проблема</span>
+      <h2>AI не решает хаос. Он&nbsp;его&nbsp;ускоряет.</h2>
+    </div>
+    <div class="grid-2-cols reveal">
+      <div class="problem-col problem-col--chaos">
+        <h4>❌ Хаос</h4>
+        <ul>
+          <li>Пишу на вдохновении — то густо, то пусто</li>
+          <li>Не знаю, о чём писать — темы закончились</li>
+          <li>Каждый раз начинаю с нуля</li>
+          <li>Подрядчики делают «что-то», но контроля нет</li>
+        </ul>
+      </div>
+      <div class="problem-col problem-col--system">
+        <h4>✓ Система</h4>
+        <ul>
+          <li>Фокус по продукту — знаю что и кому говорю</li>
+          <li>Банк идей — темы не заканчиваются</li>
+          <li>Понятный маршрут контента</li>
+          <li>Управление и повторяемость</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container--narrow reveal">
+      <div class="blockquote">
+        «Контент без распаковки смыслов — это масштабированная пустота.»
+        <cite>— Павел Лещенко</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H4: ПРОЦЕСС ====== -->
+<section class="section section--white" id="process">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow">Как это работает</span>
+      <h2>Сначала смыслы и&nbsp;стратегия. Потом автоматизация.</h2>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="card step-card">
+        <div class="step-num">01</div>
+        <h4>Распаковка</h4>
+        <p>Кто вы, для кого, что говорите, каким голосом. Анализ конкурентов.</p>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">02</div>
+        <h4>Стратегия</h4>
+        <p>Контент-план, темы, форматы, площадки. Промпты под ваш голос.</p>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">03</div>
+        <h4>Сборка системы</h4>
+        <p>Настройка автоматизации, подключение площадок, тестовый прогон.</p>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">04</div>
+        <h4>Запуск и передача</h4>
+        <p>Первый реальный контент. Докрутка. Передача управления вам.</p>
+      </div>
+    </div>
+    <div class="step-timeline reveal">
+      ⏱ 4 недели от старта до работающей системы. Ваше участие: 2-3 часа на старте.
+    </div>
+    <div style="text-align: center; margin-top: 32px;" class="reveal">
+      <a href="#system" class="btn btn--secondary">Посмотреть весь процесс →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H5: ЧТО ПОЛУЧАЕТ КЛИЕНТ ====== -->
+<section class="section" id="system">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow">Что вы получаете</span>
+      <h2>На выходе&nbsp;— не&nbsp;подрядчик, а&nbsp;своя управляемая система</h2>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="card deliverable-card">
+        <div class="card__icon card__icon--mint">🔧</div>
+        <h4>AI-контент-система</h4>
+        <p>Публикует контент на 10+ площадок автоматически. На вашем сервере, в вашем аккаунте.</p>
+      </div>
+      <div class="card deliverable-card">
+        <div class="card__icon card__icon--blue">📋</div>
+        <h4>Контент-стратегия</h4>
+        <p>Позиционирование, темы, форматы, площадки — документ под ваш бизнес.</p>
+      </div>
+      <div class="card deliverable-card">
+        <div class="card__icon card__icon--mint">🎙</div>
+        <h4>Промпты под голос</h4>
+        <p>AI пишет как вы, не шаблонно. Тон, стиль, экспертность — всё сохраняется.</p>
+      </div>
+      <div class="card deliverable-card">
+        <div class="card__icon card__icon--blue">👁</div>
+        <h4>Мониторинг конкурентов</h4>
+        <p>Система отслеживает что публикуют в вашей нише, подсвечивает рабочие темы.</p>
+      </div>
+      <div class="card deliverable-card">
+        <div class="card__icon card__icon--amber">📊</div>
+        <h4>Таблица-хаб управления</h4>
+        <p>Все статусы, идеи, контент — в одном месте. Управляете сами без техзнаний.</p>
+      </div>
+      <div class="card deliverable-card">
+        <div class="card__icon card__icon--mint">🚀</div>
+        <h4>Публикация на площадках</h4>
+        <p>Telegram, ВК, Дзен, Пикабу, VC, блог, YouTube, Instagram и другие — автоматически.</p>
+      </div>
+    </div>
+    <div class="micro-note reveal" style="background: var(--accent-blue-soft);">
+      После запуска платите только за инфраструктуру: 2 000 — 5 000 руб./месяц. К Павлу не привязаны.
+    </div>
+  </div>
+</section>
+
+<!-- ====== H6: PROOF ====== -->
+<section class="section section--dark" id="proof">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow" style="color: var(--accent-green);">Прозрачность</span>
+      <h2>Всё показывается открыто: механика, результаты, ошибки, сроки</h2>
+    </div>
+    <div class="proof-cards reveal">
+      <div class="proof-card">
+        <h4>🔬 Строится на себе</h4>
+        <p>Первая система — публичный эксперимент. Всё в реальном времени: что работает, что нет, сколько занимает.</p>
+      </div>
+      <div class="proof-card">
+        <h4>⚙️ Показываем механику</h4>
+        <p>Не только результат, но и как он получен. Промпты, автоматизации, решения — открыто.</p>
+      </div>
+      <div class="proof-card">
+        <h4>🎯 Увидеть изнутри</h4>
+        <p>Хотите увидеть систему вживую? Для этого и есть Экскурсия — 30 минут без обязательств.</p>
+      </div>
+    </div>
+    <div class="artifact-grid reveal">
+      <div class="artifact">📊 Скрин таблицы-хаба</div>
+      <div class="artifact">✍️ Пример контента до/после</div>
+      <div class="artifact">🗺 Карта площадок</div>
+      <div class="artifact">🔄 Фрагмент автоматизации</div>
+    </div>
+    <div style="text-align: center; margin-top: 40px;" class="reveal">
+      <a href="#" class="btn btn--on-dark">Посмотреть кейсы и доказательства →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H7a: ПОДХОДИТ / НЕ ПОДХОДИТ ====== -->
+<section class="section section--white" id="fit">
+  <div class="container">
+    <div class="section__header reveal">
+      <h2>Это не для всех&nbsp;— и&nbsp;это нормально</h2>
+    </div>
+    <div class="grid-2-cols reveal">
+      <div class="fit-col fit-col--yes">
+        <h4 style="color: var(--accent-green);">✓ Подходит</h4>
+        <ul>
+          <li>Действующий бизнес или экспертность</li>
+          <li>Запрос на системность, а не разовый контент</li>
+          <li>Готовность выделить 2-3 часа на старт</li>
+          <li>Желание владеть системой, а не зависеть от подрядчика</li>
+        </ul>
+      </div>
+      <div class="fit-col fit-col--no">
+        <h4 style="color: #EF4444;">✗ Не подходит</h4>
+        <ul>
+          <li>Нет продукта — пока нечего «упаковывать»</li>
+          <li>Хочется полного автопилота без участия</li>
+          <li>Нужен мгновенный результат с первого поста</li>
+          <li>Нужен просто дешёвый поток контента</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H7b: ДВА ПУТИ ====== -->
+<section class="section" id="club">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow">Выберите маршрут</span>
+      <h2>Два пути дальше</h2>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="card route-card">
+        <div class="route-card__icon">🏗</div>
+        <h3>Хочу, чтобы внедрили под мой бизнес</h3>
+        <p>Готовая AI-контент-система за&nbsp;4&nbsp;недели. Распаковка, стратегия, настройка, запуск, передача. Ваше участие — 2-3 часа на старте.</p>
+        <a href="#contact" class="btn btn--primary">Записаться на экскурсию</a>
+      </div>
+      <div class="card route-card">
+        <div class="route-card__icon">🧠</div>
+        <h3>Хочу разобраться и собрать часть сам</h3>
+        <p>Клуб «Включи&nbsp;ИИ» — обзоры, шаблоны, инструкции, живые разборы, сообщество. 1&nbsp;490&nbsp;руб./мес.</p>
+        <a href="#" class="btn btn--secondary">Узнать про клуб →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H8: FAQ ====== -->
+<section class="section section--white" id="faq">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="eyebrow">Вопросы</span>
+      <h2>Частые вопросы до&nbsp;созвона</h2>
+    </div>
+    <div class="container--narrow reveal">
+      <div class="faq-item">
+        <button class="faq-question">Это подойдёт для моей ниши?</button>
+        <div class="faq-answer"><div class="faq-answer__inner">Система работает для любой ниши, где есть экспертность и продукт. Мы начинаем с распаковки ваших смыслов — контент строится вокруг вашего бизнеса, а не шаблонных тем. На экскурсии разберём конкретно вашу ситуацию.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Нужны ли технические знания?</button>
+        <div class="faq-answer"><div class="faq-answer__inner">Нет. Система управляется через таблицу-хаб — это как работа с обычной таблицей. Статусы, идеи, готовый контент — всё понятно без программирования. Техническую настройку делаю я.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Сколько времени займёт внедрение?</button>
+        <div class="faq-answer"><div class="faq-answer__inner">4 недели от старта до работающей системы. Ваше участие: 2-3 часа на распаковку в первую неделю, потом — согласование первых тестовых постов. Остальное делаю я.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Чем это отличается от SMM-агентства?</button>
+        <div class="faq-answer"><div class="faq-answer__inner">Агентство — исполнитель, которому нужно ставить задачи и контролировать. Без стратегии и смыслов даже лучший специалист работает в пустоту. Плюс зависимость от человека — ушёл менеджер, всё заново. Я строю инфраструктуру: система работает независимо от подрядчика.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Кейсы есть?</button>
+        <div class="faq-answer"><div class="faq-answer__inner">Честно: кейсов на чужих бизнесах пока нет. Первую систему строю на себе — всё открыто в реальном времени: механика, результаты, ошибки, сроки. Приходите на экскурсию — покажу как работает изнутри.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Что такое Экскурсия?</button>
+        <div class="faq-answer"><div class="faq-answer__inner">30-40 минут, бесплатно, без обязательств. Показываю систему изнутри, разбираем вашу ситуацию, отвечаю на вопросы. Если подходит — предложу маршрут. Если нет — честно скажу.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== H9: ФИНАЛЬНЫЙ CTA ====== -->
+<section class="section section--dark final-cta" id="contact">
+  <div class="container reveal">
+    <h2>Хотите понять, как это может работать в&nbsp;вашем бизнесе?</h2>
+    <p class="lead">Экскурсия по AI-контент-системе — бесплатно, 30-40 минут, без обязательств и&nbsp;без продажи в&nbsp;лоб.</p>
+    <div class="final-cta__list">
+      <div class="final-cta__item"><span class="dot"></span> Покажу систему изнутри</div>
+      <div class="final-cta__item"><span class="dot"></span> Разберём вашу ситуацию</div>
+      <div class="final-cta__item"><span class="dot"></span> Отвечу на вопросы честно</div>
+    </div>
+    <div class="final-cta__btns">
+      <a href="#" class="btn btn--on-dark" style="font-size: 18px; padding: 18px 36px;">Записаться на экскурсию</a>
+      <a href="#club" class="btn btn--ghost-dark">Сначала посмотреть клуб</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="header__logo" style="color: var(--text-on-dark);">ВКЛЮЧИ <span style="color: var(--accent-green);">ИИ</span></a>
+        <p>AI-контент-системы для предпринимателей и&nbsp;экспертов. Смыслы → стратегия → автоматизация → результат.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Навигация</h4>
+        <a href="#system">Система</a>
+        <a href="#process">Как это работает</a>
+        <a href="#proof">Кейсы</a>
+        <a href="#club">Клуб</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer__col">
+        <h4>О проекте</h4>
+        <a href="#about">О Павле</a>
+        <a href="#">Блог</a>
+        <a href="#contact">Контакты</a>
+      </div>
+      <div class="footer__col">
+        <h4>Контакты</h4>
+        <a href="https://t.me/Switch_On_AI" target="_blank">Telegram-канал</a>
+        <a href="https://t.me/Leshenko" target="_blank">Написать Павлу</a>
+        <a href="mailto:info@switchonai.ru">info@switchonai.ru</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 ВКЛЮЧИ ИИ. Павел Лещенко.</span>
+      <span><a href="#" style="color: var(--text-on-dark-secondary);">Политика конфиденциальности</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== SCRIPTS ====== -->
+<script>
+// Header scroll
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isActive = item.classList.contains('active');
+
+    document.querySelectorAll('.faq-item.active').forEach(i => {
+      i.classList.remove('active');
+      i.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    if (!isActive) {
+      item.classList.add('active');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// Reveal on scroll
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
